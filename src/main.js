@@ -1,5 +1,3 @@
-import "./styles.css";
-
 const phrases = [
   "Loading home...",
   "Verifying residence...",

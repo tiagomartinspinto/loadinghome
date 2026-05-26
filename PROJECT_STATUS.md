@@ -13,6 +13,7 @@
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
 - Added a GitHub Pages deployment workflow for building and publishing `dist`.
+- Kept source asset paths relative so the page also works if existing Pages settings serve the repository root directly.
 - Added README documentation and this project status file.
 
 ## Verification Performed
@@ -20,6 +21,7 @@
 - Ran `npm install` successfully.
 - Ran `npm run build` successfully.
 - Confirmed the built `dist/index.html` uses `/loadinghome/assets/...` paths.
+- Confirmed the source `index.html` uses relative `src/...` asset paths for branch-root Pages compatibility.
 - Started the Vite development server with `npm run dev -- --port 5173`.
 - Confirmed `http://localhost:5173/` returns `200 OK`.
 - Started the Vite preview server with `npm run preview -- --port 4173`.
