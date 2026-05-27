@@ -109,13 +109,20 @@ h2 {
   font-weight: 560;
 }
 
-.intro > p,
+.intro-note,
 .panel-heading p,
 .small-note {
   color: var(--muted);
 }
 
-.intro > p {
+.intro-subtitle {
+  max-width: 34rem;
+  margin-bottom: 0.8rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.intro-note {
   max-width: 34rem;
   margin-bottom: 34px;
 }
@@ -542,6 +549,19 @@ textarea:focus {
 .status-panel {
   border-top: 1px solid var(--line);
   padding-top: 18px;
+}
+
+.footer-note {
+  max-width: 46rem;
+  margin-top: 38px;
+  border-top: 1px solid var(--soft-line);
+  padding-top: 13px;
+  color: var(--quiet);
+  font-size: 0.72rem;
+}
+
+.footer-note p {
+  margin-bottom: 0;
 }
 
 .event-log {

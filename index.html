@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Loading Home: 97% is a minimalist web artwork about immigration as a permanent state of almost-arrival."
+      content="Auto da Espera is a minimalist web artwork and morality form in five pending acts."
     />
-    <title>Loading Home: 97%</title>
+    <title>Auto da Espera</title>
     <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
@@ -16,15 +16,14 @@
     <main id="main" class="page-shell">
       <header class="intro" aria-labelledby="artwork-title">
         <div class="case-row" aria-label="Case file status">
-          <span>case file / still opening</span>
+          <span>system status / Loading Home: <span id="titlePercent">97%</span></span>
           <span id="caseCode">status: <span data-term="pending">pending</span></span>
         </div>
 
-        <h1 id="artwork-title">
-          Loading Home: <span id="titlePercent">97%</span>
-        </h1>
+        <h1 id="artwork-title">Auto da Espera</h1>
 
-        <p>Your home is being prepared. Some documents are still missing.</p>
+        <p class="intro-subtitle">A morality form in five pending acts.</p>
+        <p class="intro-note">Your home is being prepared. Some documents are still missing.</p>
 
         <section class="loading-panel" aria-label="Loading progress">
           <div class="loading-copy">
@@ -219,6 +218,14 @@
           <li>You are almost there.</li>
         </ul>
       </aside>
+
+      <footer class="footer-note">
+        <p>
+          "Auto da Espera" can be read as "The Play of Waiting" or "The Morality Play of Waiting."
+          The title loosely echoes the Portuguese theatrical form "auto", associated with short
+          allegorical and moral plays, while "espera" means waiting.
+        </p>
+      </footer>
     </main>
 
     <script type="module" src="src/main.js"></script>
