@@ -73,6 +73,63 @@ const suggestions = [
   "Elsewhere"
 ];
 
+const applicantRoles = [
+  "The Applicant",
+  "The Arriving One",
+  "The Pending Person",
+  "Case 97",
+  "The One Who Is Almost Here"
+];
+
+const acts = [
+  ["Act I - The Form", "The form accepts the data but not the person."],
+  ["Act II - The Translation", "The interface translates the answer, then edits the intention."],
+  ["Act III - The Witness", "The record is present, but the witness is not processed."],
+  ["Act IV - The Inspection", "The rules change while the question is being answered."],
+  ["Act V - The Almost", "Application remains open. Belonging pending. Waiting may continue."]
+];
+
+const officeVoices = [
+  ["The Clerk of Belonging", "The Clerk enters without entering."],
+  ["The Minister of Almost", "Almost is accepted as proof of effort, not as arrival."],
+  ["The Inspector of Origin", "The Form asks for a smaller version of you."],
+  ["The Archivist of Former Addresses", "The previous address is still responding."],
+  ["The Witness of Silence", "The Witness is present but not processed."],
+  ["The Translator Who Corrects Too Much", "The Translator improves your sentence until it no longer belongs to you."],
+  ["The Door That Requests More Documents", "The Door opens into another door."],
+  ["The Queue", "The Queue remembers your previous hesitation."],
+  ["The Stamp", "The Stamp refuses to fall."],
+  ["The Border Without a Wall", "The border is not drawn. It still decides."],
+  ["The Chorus of Pending Cases", "pending, pending, pending."]
+];
+
+const translationScenes = [
+  ["I live here", "temporary presence detected."],
+  ["I work here", "economic usefulness pending."],
+  ["I belong here", "unsupported claim."],
+  ["I remember home", "memory must match accepted format."],
+  ["I am here", "arrival detected, belonging pending."],
+  ["I will stay", "future presence requires review."]
+];
+
+const inspectionQuestions = [
+  "How many winters until arrival becomes residence?",
+  "Select one: useful / grateful / invisible / integrated",
+  "Confirm that your name fits the field.",
+  "Confirm that your memory has been translated correctly.",
+  "Confirm that your silence is voluntary.",
+  "Choose one door. Each door opens into another door."
+];
+
+const witnessRecords = [
+  "statement unavailable",
+  "record incomplete",
+  "witness not heard",
+  "experience outside accepted format",
+  "pain requires official translation",
+  "testimony too complex"
+];
+
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const root = document.documentElement;
 const progressFill = document.querySelector("#progressFill");
@@ -94,12 +151,22 @@ const birthPlaceMessage = document.querySelector("#birthPlaceMessage");
 const currentAddress = document.querySelector("#currentAddress");
 const currentAddressMessage = document.querySelector("#currentAddressMessage");
 const termNodes = Array.from(document.querySelectorAll("[data-term]"));
+const applicantRole = document.querySelector("#applicantRole");
+const actTitle = document.querySelector("#actTitle");
+const actDescription = document.querySelector("#actDescription");
+const voiceSpeaker = document.querySelector("#voiceSpeaker");
+const voiceText = document.querySelector("#voiceText");
+const inspectionQuestion = document.querySelector("#inspectionQuestion");
+const translationInput = document.querySelector("#translationInput");
+const translationOutput = document.querySelector("#translationOutput");
+const recordCaptions = Array.from(document.querySelectorAll("[data-record-caption]"));
 
 let progress = 91.4;
 let phraseIndex = 0;
-let mapIndex = 0;
+let mapIndex = -1;
 let attempts = 0;
 let progressTarget = 96.4;
+let voiceIndex = 0;
 
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -133,8 +200,10 @@ function updateProgress() {
 
 function updatePhrase() {
   phraseIndex = (phraseIndex + 1) % phrases.length;
+  voiceIndex = (voiceIndex + 1) % officeVoices.length;
   loadingPhrase.textContent = phrases[phraseIndex];
   progressBar.setAttribute("aria-valuetext", `${loadingPhrase.textContent}, ${progress.toFixed(1)} percent`);
+  renderScene();
 }
 
 function updateMap() {
@@ -175,11 +244,33 @@ function addLog(message) {
   }
 }
 
+function renderScene() {
+  const act = acts[Math.min(Math.floor(attempts / 2), acts.length - 1)];
+  const role = applicantRoles[attempts % applicantRoles.length];
+  const voice = officeVoices[(voiceIndex + attempts) % officeVoices.length];
+  const translation = translationScenes[attempts % translationScenes.length];
+  const question = inspectionQuestions[(attempts + Math.max(mapIndex, 0)) % inspectionQuestions.length];
+
+  applicantRole.textContent = `${role} is almost here.`;
+  actTitle.textContent = act[0];
+  actDescription.textContent = act[1];
+  voiceSpeaker.textContent = voice[0];
+  voiceText.textContent = voice[1];
+  inspectionQuestion.textContent = question;
+  translationInput.textContent = translation[0];
+  translationOutput.textContent = translation[1];
+
+  recordCaptions.forEach((caption, index) => {
+    caption.textContent = witnessRecords[(index + attempts) % witnessRecords.length];
+  });
+}
+
 function nudge(message) {
   attempts += 1;
   root.style.setProperty("--pressure", String(Math.min(attempts, 8)));
   progress = clamp(progress - (0.18 + Math.random() * 0.6), 84.2, 96.9);
   renderProgress();
+  renderScene();
 
   if (message) {
     formStatus.textContent = message;
@@ -245,7 +336,8 @@ function resetExperience() {
   progress = 91.4;
   progressTarget = 96.4;
   phraseIndex = 0;
-  mapIndex = 0;
+  mapIndex = -1;
+  voiceIndex = 0;
   root.style.setProperty("--pressure", "0");
   loadingPhrase.textContent = phrases[0];
   formStatus.textContent = "The system found several versions of you.";
@@ -256,6 +348,7 @@ function resetExperience() {
   ["Language preference changed automatically.", "You are almost there."].forEach(addLog);
   hideSuggestions(birthPlace);
   hideSuggestions(currentAddress);
+  renderScene();
   renderProgress();
   updateMap();
 }
@@ -294,6 +387,7 @@ form.addEventListener("submit", (event) => {
 resetButton.addEventListener("click", resetExperience);
 
 renderProgress();
+renderScene();
 updateMap();
 
 window.setInterval(updateProgress, reducedMotion ? 5200 : 1400);

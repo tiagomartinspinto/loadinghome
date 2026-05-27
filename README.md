@@ -4,6 +4,8 @@
 
 The work borrows from quiet government forms, browser loading screens, missing archives, and incomplete location records. Its emotional pressure comes from small refusals, repeated checks, and the feeling of being almost accepted.
 
+It is informed by public discourse around migration, racism, bureaucracy, and belonging, including migrant-led media contexts, but it does not reproduce, process, quote, or summarize real personal stories. The voices in the interface are original allegorical roles: clerks, forms, queues, witnesses, stamps, and other institutional figures.
+
 ## Run Locally
 
 Install dependencies:
@@ -40,6 +42,7 @@ https://tiagomartinspinto.github.io/loadinghome/
 - The map is an abstract local panel, not a real map service.
 - Birthplace and address fields show fake browser-like suggestions.
 - The form never submits anywhere; each attempt leaves the application open.
+- Office voices and act labels shift as a contemporary bureaucratic morality play.
 - `start again` resets the in-page interaction state.
 
 ## Privacy

@@ -55,6 +55,26 @@
         </section>
       </header>
 
+      <section class="panel scene-panel" aria-labelledby="scene-title">
+        <div class="panel-heading">
+          <p class="kicker">office voices / case 97</p>
+          <h2 id="scene-title">The Applicant waits before the Form</h2>
+          <p id="applicantRole" aria-live="polite">Case 97 is almost here.</p>
+        </div>
+
+        <div class="scene-grid" aria-live="polite">
+          <div>
+            <p class="scene-label">current act</p>
+            <p id="actTitle" class="scene-title-line">Act I - The Form</p>
+            <p id="actDescription" class="scene-text">The form accepts the data but not the person.</p>
+          </div>
+          <div>
+            <p id="voiceSpeaker" class="scene-label">The Clerk of Belonging</p>
+            <p id="voiceText" class="scene-text">The Clerk enters without entering.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="grid-section" aria-label="Application and location">
         <section class="panel form-panel" aria-labelledby="form-title">
           <div class="panel-heading">
@@ -133,46 +153,61 @@
               <dd id="homeRecord">Home not confirmed</dd>
             </div>
           </dl>
+
+          <div class="inspection-box" aria-live="polite">
+            <div>
+              <p class="scene-label">inspection</p>
+              <p id="inspectionQuestion">How many winters until arrival becomes residence?</p>
+            </div>
+            <div>
+              <p class="scene-label">translation</p>
+              <p>
+                <span id="translationInput">I live here</span>
+                <span aria-hidden="true"> -&gt; </span>
+                <span id="translationOutput">temporary presence detected.</span>
+              </p>
+            </div>
+          </div>
         </section>
       </section>
 
       <section class="panel archive-panel" aria-labelledby="archive-title">
         <div class="panel-heading">
           <p class="kicker">missing archive</p>
-          <h2 id="archive-title">Family photos, partially received</h2>
-          <p>Memory loaded with errors.</p>
+          <h2 id="archive-title">Records, partially received</h2>
+          <p>The Witness is present but not processed.</p>
         </div>
 
         <div class="archive-grid" aria-label="Unavailable image archive">
           <figure class="archive-item">
             <div class="archive-frame is-empty" role="img" aria-label="Blank image frame"></div>
-            <figcaption>preview pending</figcaption>
+            <figcaption data-record-caption>statement unavailable</figcaption>
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-missing" role="img" aria-label="Image unavailable">
               <span>image unavailable</span>
             </div>
-            <figcaption>record incomplete</figcaption>
+            <figcaption data-record-caption>record incomplete</figcaption>
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-blur" role="img" aria-label="Blurred empty memory placeholder"></div>
-            <figcaption>memory failed to load</figcaption>
+            <figcaption data-record-caption>witness not heard</figcaption>
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-archived" role="img" aria-label="Archived memory frame">
               <span>archived</span>
             </div>
-            <figcaption>previous country</figcaption>
+            <figcaption data-record-caption>experience outside accepted format</figcaption>
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-cropped" role="img" aria-label="Cropped fragment placeholder"></div>
-            <figcaption>partial scan</figcaption>
+            <figcaption data-record-caption>pain requires official translation</figcaption>
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-missing" role="img" aria-label="File not found">
               <span>file not found</span>
             </div>
-            <figcaption>loading family image...</figcaption>
+            <figcaption data-record-caption>testimony too complex</figcaption>
           </figure>
         </div>
       </section>

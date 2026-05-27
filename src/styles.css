@@ -188,6 +188,44 @@ h2 {
   padding-top: 18px;
 }
 
+.scene-panel {
+  margin-bottom: 28px;
+}
+
+.scene-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: 28px;
+  border-top: 1px solid var(--soft-line);
+  padding-top: 13px;
+}
+
+.scene-grid > div {
+  min-width: 0;
+}
+
+.scene-label,
+.scene-title-line {
+  margin-bottom: 0.32rem;
+  font-size: 0.7rem;
+}
+
+.scene-label {
+  color: var(--quiet);
+  text-transform: uppercase;
+}
+
+.scene-title-line {
+  color: var(--ink);
+  font-weight: 560;
+}
+
+.scene-text {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .panel-heading {
   margin-bottom: 18px;
 }
@@ -352,6 +390,27 @@ h2 {
   margin: 0.2rem 0 0;
   color: var(--ink);
   font-size: 0.78rem;
+}
+
+.inspection-box {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 11px 0;
+}
+
+.inspection-box p {
+  margin-bottom: 0.22rem;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.inspection-box p:last-child {
+  margin-bottom: 0;
+  color: var(--ink);
 }
 
 .form-panel {
@@ -539,7 +598,8 @@ textarea:focus {
 
   .case-row,
   .loading-panel,
-  .grid-section {
+  .grid-section,
+  .scene-grid {
     grid-template-columns: 1fr;
   }
 

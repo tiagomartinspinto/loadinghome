@@ -10,6 +10,8 @@
 - Added an abstract map panel with thin grid lines, a moving dot, and non-specific shifting location labels.
 - Added subtle label switching between several languages.
 - Added an administrative form with birthplace rejection, fake autocomplete, impossible submit states, and a reset link.
+- Added a minimalist office-voices layer inspired by a bureaucratic morality play, with abstract applicant roles, act labels, inspection prompts, mistranslation states, and institutional chorus lines.
+- Reworked the archive language toward abstract witness and record fragments instead of personal or autobiographical material.
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
 - Added a GitHub Pages deployment workflow for building and publishing `dist`.
@@ -28,15 +30,16 @@
 - Confirmed `http://localhost:4173/loadinghome/` and its hashed JS/CSS assets return `200 OK`.
 - Ran a local interaction smoke harness for progress behavior, phrase/map rotation, language switching, birthplace and address uncertainty, autocomplete fills, impossible submit states, reset behavior, and the fixed `97%` title.
 - Checked the running `/loadinghome/` preview in the browser for document title, fixed `Loading Home: 97%` heading, archive/map/form presence, language/map/progress changes, no console errors, and no horizontal overflow.
-- Checked a mobile viewport for single-column application, archive, and form layout with no horizontal overflow.
+- Checked the updated office-voices layer in the browser for act labels, applicant roles, inspection prompts, mistranslation text, witness archive captions, autocomplete suggestions, impossible submit behavior, and reset behavior.
+- Reviewed responsive rules for the added office-voices section; mobile layout should remain single-column, with a manual device check still recommended.
 - Scanned public-facing files for references to the named assistant/tooling terms, specific countries, and specific cities; no matches were found.
 - Scanned for personal identifiers; the only match is the GitHub Pages URL required in `README.md`.
 
 ## Files Created Or Changed
 
 - `index.html` - semantic page structure for the artwork.
-- `src/main.js` - interaction logic for progress, language switching, map labels, form behavior, autocomplete, and reset.
-- `src/styles.css` - minimalist visual system and responsive layout.
+- `src/main.js` - interaction logic for progress, language switching, map labels, form behavior, autocomplete, office voices, act progression, and reset.
+- `src/styles.css` - minimalist visual system, office-voices layout, and responsive layout.
 - `vite.config.js` - Vite configuration with the `/loadinghome/` base path.
 - `package.json` - Vite scripts and dependency declaration.
 - `.github/workflows/deploy.yml` - GitHub Pages build and deploy workflow.
@@ -49,7 +52,8 @@
 - The map is intentionally symbolic and does not use a geographic API.
 - Fake autocomplete supports pointer and focus interaction, but not custom arrow-key navigation.
 - The loading state is intentionally impossible to complete.
-- Browser automation could not type into form fields because the test bridge's virtual clipboard was unavailable; form behavior was covered with the local DOM smoke harness instead.
+- One automated fill helper was unavailable in the test browser; keyboard-entry behavior was verified with keypresses, suggestion clicks, submit attempts, and reset.
+- The office voices are text-only and intentionally non-illustrative; there are no staged characters or theatrical visuals.
 
 ## Manual Tests To Do Next
 
@@ -58,5 +62,6 @@
 - Type into `Place of birth` and confirm quiet rejection messages appear.
 - Click autocomplete suggestions in birthplace and current address fields.
 - Press `Continue` repeatedly and confirm the form remains open.
+- Confirm the office voices, inspection question, archive captions, and act labels change after repeated interactions.
 - Press `start again` and confirm fields, status text, and progress reset.
 - Check with reduced motion enabled in the browser or operating system.
