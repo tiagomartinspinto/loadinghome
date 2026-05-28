@@ -74,60 +74,60 @@ const suggestions = [
 ];
 
 const applicantRoles = [
-  "The Applicant",
-  "The Arriving One",
-  "The Pending Person",
-  "Case 97",
-  "The One Who Is Almost Here"
+  "Applicant record",
+  "Arrival record",
+  "Pending person record",
+  "Case HOME-00097",
+  "Residence recognition record"
 ];
 
 const acts = [
-  ["Act I - The Form", "The form accepts the data but not the person."],
-  ["Act II - The Translation", "The interface translates the answer, then edits the intention."],
-  ["Act III - The Witness", "The record is present, but the witness is not processed."],
-  ["Act IV - The Inspection", "The rules change while the question is being answered."],
-  ["Act V - The Almost", "Application remains open. Belonging pending. Waiting may continue."]
+  ["Review stage 1 of 5", "Identity fields accepted. Recognition unresolved."],
+  ["Review stage 2 of 5", "Submitted language translated into administrative intent."],
+  ["Review stage 3 of 5", "Supporting evidence present. Testimony not processed."],
+  ["Review stage 4 of 5", "Additional checks opened while previous checks remain open."],
+  ["Review stage 5 of 5", "Application remains open. Belonging pending. Waiting may continue."]
 ];
 
 const officeVoices = [
-  ["The Clerk of Belonging", "The Clerk enters without entering."],
-  ["The Minister of Almost", "Almost is accepted as proof of effort, not as arrival."],
-  ["The Inspector of Origin", "The Form asks for a smaller version of you."],
-  ["The Archivist of Former Addresses", "The previous address is still responding."],
-  ["The Witness of Silence", "The Witness is present but not processed."],
-  ["The Translator Who Corrects Too Much", "The Translator improves your sentence until it no longer belongs to you."],
-  ["The Door That Requests More Documents", "The Door opens into another door."],
-  ["The Queue", "The Queue remembers your previous hesitation."],
-  ["The Stamp", "The Stamp refuses to fall."],
-  ["The Border Without a Wall", "The border is not drawn. It still decides."],
-  ["The Chorus of Pending Cases", "pending, pending, pending."]
+  ["Internal comment", "The form asks for a smaller version of the record."],
+  ["Eligibility note", "Almost is accepted as proof of effort, not as arrival."],
+  ["Origin check", "The previous address is still responding."],
+  ["Former address archive", "A former home remains active in the file."],
+  ["Witness record", "The witness is present but not processed."],
+  ["Translation review", "The sentence is corrected until intent no longer belongs to it."],
+  ["Document request", "One request opens into another request."],
+  ["Queue status", "Previous hesitation retained."],
+  ["Stamp status", "Authorization not applied."],
+  ["Boundary rule", "Rule not visible. Delay active."],
+  ["Pending case group", "pending, pending, pending."]
 ];
 
 const translationScenes = [
-  ["I live here", "temporary presence detected."],
-  ["I work here", "economic usefulness pending."],
-  ["I belong here", "unsupported claim."],
-  ["I remember home", "memory must match accepted format."],
-  ["I am here", "arrival detected, belonging pending."],
-  ["I will stay", "future presence requires review."]
+  ["Statement: I live here", "Recorded as: temporary presence detected."],
+  ["Statement: I work here", "Recorded as: economic usefulness pending."],
+  ["Statement: I belong here", "Recorded as: unsupported claim."],
+  ["Statement: I remember home", "Recorded as: memory must match accepted format."],
+  ["Statement: I am here", "Recorded as: arrival detected, belonging pending."],
+  ["Statement: I will stay", "Recorded as: future presence requires review."]
 ];
 
 const inspectionQuestions = [
-  "How many winters until arrival becomes residence?",
-  "Select one: useful / grateful / invisible / integrated",
-  "Confirm that your name fits the field.",
-  "Confirm that your memory has been translated correctly.",
-  "Confirm that your silence is voluntary.",
-  "Choose one door. Each door opens into another door."
+  "Internal query: how many winters until arrival becomes residence?",
+  "Required selection: useful / grateful / invisible / integrated",
+  "Field check: confirm that the name fits the field.",
+  "Translation check: confirm that memory has been translated correctly.",
+  "Silence check: confirm that silence is voluntary.",
+  "Routing check: one document request opens another document request."
 ];
 
 const witnessRecords = [
   "statement unavailable",
   "record incomplete",
-  "witness not heard",
+  "statement not attached",
   "experience outside accepted format",
-  "pain requires official translation",
-  "testimony too complex"
+  "harm requires official translation",
+  "testimony exceeds field length"
 ];
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -251,7 +251,7 @@ function renderScene() {
   const translation = translationScenes[attempts % translationScenes.length];
   const question = inspectionQuestions[(attempts + Math.max(mapIndex, 0)) % inspectionQuestions.length];
 
-  applicantRole.textContent = `${role} is almost here.`;
+  applicantRole.textContent = `${role} / recognition unresolved.`;
   actTitle.textContent = act[0];
   actDescription.textContent = act[1];
   voiceSpeaker.textContent = voice[0];

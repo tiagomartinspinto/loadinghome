@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Auto da Espera is a minimalist web artwork and morality form in five pending acts."
+      content="Auto da Espera is a minimalist administrative web artwork about a case that remains almost processed."
     />
     <title>Auto da Espera</title>
     <link rel="stylesheet" href="src/styles.css" />
@@ -16,8 +16,9 @@
     <main id="main" class="page-shell">
       <header class="intro" aria-labelledby="artwork-title">
         <div class="case-row" aria-label="Case file status">
-          <span>system status / Loading Home: <span id="titlePercent">97%</span></span>
-          <span id="caseCode">status: <span data-term="pending">pending</span></span>
+          <span>CASE HOME-00097</span>
+          <span id="caseCode">STATUS: <span data-term="pending">PENDING</span></span>
+          <span>COMPLETION: <span id="titlePercent">97%</span></span>
         </div>
 
         <h1 id="artwork-title">Auto da Espera</h1>
@@ -56,20 +57,20 @@
 
       <section class="panel scene-panel" aria-labelledby="scene-title">
         <div class="panel-heading">
-          <p class="kicker">office voices / case 97</p>
-          <h2 id="scene-title">The Applicant waits before the Form</h2>
-          <p id="applicantRole" aria-live="polite">Case 97 is almost here.</p>
+          <p class="kicker">internal review</p>
+          <h2 id="scene-title">Case review remains pending</h2>
+          <p id="applicantRole" aria-live="polite">Applicant record remains open.</p>
         </div>
 
         <div class="scene-grid" aria-live="polite">
           <div>
-            <p class="scene-label">current act</p>
-            <p id="actTitle" class="scene-title-line">Act I - The Form</p>
-            <p id="actDescription" class="scene-text">The form accepts the data but not the person.</p>
+            <p class="scene-label">review sequence</p>
+            <p id="actTitle" class="scene-title-line">Review stage 1 of 5</p>
+            <p id="actDescription" class="scene-text">Identity fields accepted. Recognition unresolved.</p>
           </div>
           <div>
-            <p id="voiceSpeaker" class="scene-label">The Clerk of Belonging</p>
-            <p id="voiceText" class="scene-text">The Clerk enters without entering.</p>
+            <p id="voiceSpeaker" class="scene-label">internal comment</p>
+            <p id="voiceText" class="scene-text">The form asks for a smaller version of the record.</p>
           </div>
         </div>
       </section>
@@ -78,7 +79,7 @@
         <section class="panel form-panel" aria-labelledby="form-title">
           <div class="panel-heading">
             <p class="kicker">form 97 / residence</p>
-            <h2 id="form-title">Please wait while we verify where you are from</h2>
+            <h2 id="form-title">Identity and residence fields</h2>
             <p id="formStatus" aria-live="polite">The system found several versions of you.</p>
           </div>
 
@@ -123,12 +124,12 @@
 
         <section class="panel map-panel" aria-labelledby="map-title">
           <div class="panel-heading">
-            <p class="kicker">location record</p>
-            <h2 id="map-title">Map panel</h2>
+            <p class="kicker">residence trace</p>
+            <h2 id="map-title">Location verification</h2>
             <p id="mapStatus" aria-live="polite">Locating...</p>
           </div>
 
-          <div class="map-stage" aria-label="Abstract map panel">
+          <div class="map-stage" aria-label="Residence trace diagram">
             <svg class="route" viewBox="0 0 100 64" aria-hidden="true">
               <path d="M12 48 C 30 20, 51 44, 67 28 S 83 18, 90 12"></path>
             </svg>
@@ -172,28 +173,28 @@
 
       <section class="panel archive-panel" aria-labelledby="archive-title">
         <div class="panel-heading">
-          <p class="kicker">missing archive</p>
-          <h2 id="archive-title">Records, partially received</h2>
-          <p>The Witness is present but not processed.</p>
+          <p class="kicker">supporting evidence</p>
+          <h2 id="archive-title">Supporting evidence incomplete</h2>
+          <p>Required evidence is not available in an accepted format.</p>
         </div>
 
-        <div class="archive-grid" aria-label="Unavailable image archive">
+        <div class="archive-grid" aria-label="Missing supporting evidence records">
           <figure class="archive-item">
-            <div class="archive-frame is-empty" role="img" aria-label="Blank image frame"></div>
+            <div class="archive-frame is-empty" role="img" aria-label="Blank evidence frame"></div>
             <figcaption data-record-caption>statement unavailable</figcaption>
           </figure>
           <figure class="archive-item">
-            <div class="archive-frame is-missing" role="img" aria-label="Image unavailable">
-              <span>image unavailable</span>
+            <div class="archive-frame is-missing" role="img" aria-label="Evidence unavailable">
+              <span>evidence unavailable</span>
             </div>
             <figcaption data-record-caption>record incomplete</figcaption>
           </figure>
           <figure class="archive-item">
-            <div class="archive-frame is-blur" role="img" aria-label="Blurred empty memory placeholder"></div>
+            <div class="archive-frame is-blur" role="img" aria-label="Unclear evidence placeholder"></div>
             <figcaption data-record-caption>witness not heard</figcaption>
           </figure>
           <figure class="archive-item">
-            <div class="archive-frame is-archived" role="img" aria-label="Archived memory frame">
+            <div class="archive-frame is-archived" role="img" aria-label="Archived evidence frame">
               <span>archived</span>
             </div>
             <figcaption data-record-caption>experience outside accepted format</figcaption>
