@@ -16,6 +16,10 @@
 - Reworked the archive language and layout toward missing supporting evidence instead of gallery-like or autobiographical material.
 - Flattened the surface so the page reads more like one continuous administrative record.
 - Strengthened the top case header (`CASE HOME-00097 / STATUS: PENDING / COMPLETION: 97%`) and made `Auto da Espera` quieter on the surface.
+- Added procedural pressure driven by the existing `attempts` state and `--pressure` variable, affecting labels, reason-field limits, requirements, status logs, submit states, and evidence captions.
+- Added small web-native frictions: dead document links, browser-like protocol residue, unavailable-document responses, and requirements that reopen.
+- Added `?mode=exhibition` to slowly simulate pending review activity without completing the case, with reduced-motion support.
+- Imported CSS from `src/main.js` and removed the direct stylesheet link from `index.html` while keeping a source-mode stylesheet fallback for branch-based Pages serving.
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
 - Added a GitHub Pages deployment workflow for building and publishing `dist`.
@@ -38,13 +42,16 @@
 - Checked the updated internal-review layer in the browser for review stage labels, applicant record status, inspection prompts, mistranslation text, supporting evidence captions, autocomplete suggestions, impossible submit behavior, and reset behavior.
 - Checked a 390px mobile viewport for single-column application, scene, and archive layout with no horizontal overflow.
 - Checked the colder administrative layout in preview for case header strength, internal review wording, location verification heading, supporting-evidence rows, autocomplete behavior, review-stage changes, and no console errors.
+- Checked exhibition mode in preview for automatic pending-review updates and no completion.
+- Checked raw static serving with the JavaScript stylesheet fallback after removing the direct stylesheet link.
+- Confirmed no external APIs, analytics, uploads, cookies, or `localStorage` were introduced.
 - Scanned public-facing files for references to the named assistant/tooling terms, specific countries, and specific cities; no matches were found.
 - Scanned for personal identifiers; the only match is the GitHub Pages URL required in `README.md`.
 
 ## Files Created Or Changed
 
 - `index.html` - semantic page structure for the artwork.
-- `src/main.js` - interaction logic for progress, language switching, residence trace labels, form behavior, autocomplete, internal review stages, case notes, and reset.
+- `src/main.js` - interaction logic for progress, language switching, residence trace labels, form behavior, autocomplete, internal review stages, case notes, procedural pressure, dead links, exhibition mode, and reset.
 - `src/styles.css` - cold minimalist visual system, continuous administrative layout, supporting-evidence rows, and responsive layout.
 - `vite.config.js` - Vite configuration with the `/loadinghome/` base path.
 - `package.json` - Vite scripts and dependency declaration.

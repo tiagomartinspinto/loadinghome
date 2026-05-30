@@ -1,3 +1,14 @@
+const viteBase = import.meta.env?.BASE_URL;
+
+if (viteBase) {
+  import("./styles.css");
+} else {
+  const stylesheet = document.createElement("link");
+  stylesheet.rel = "stylesheet";
+  stylesheet.href = import.meta.url.replace(/\/[^/]*$/, "/styles.css");
+  document.head.append(stylesheet);
+}
+
 const phrases = [
   "Loading home...",
   "Verifying residence...",
@@ -51,13 +62,12 @@ const addressMessages = [
 ];
 
 const submitStates = [
-  "Checking...",
-  "Almost accepted...",
-  "More information required.",
-  "Address accepted, belonging pending.",
-  "Application remains open.",
-  "Verification incomplete.",
-  "Continue later."
+  "CHECK RECORD",
+  "VERIFY LANGUAGE",
+  "REQUEST EVIDENCE",
+  "ASSESS USEFULNESS",
+  "KEEP CASE OPEN",
+  "REOPEN REQUIREMENT"
 ];
 
 const suggestions = [
@@ -83,10 +93,10 @@ const applicantRoles = [
 
 const acts = [
   ["Review stage 1 of 5", "Identity fields accepted. Recognition unresolved."],
-  ["Review stage 2 of 5", "Submitted language translated into administrative intent."],
-  ["Review stage 3 of 5", "Supporting evidence present. Testimony not processed."],
-  ["Review stage 4 of 5", "Additional checks opened while previous checks remain open."],
-  ["Review stage 5 of 5", "Application remains open. Belonging pending. Waiting may continue."]
+  ["Review stage 2 of 5", "Language accepted after intention is corrected."],
+  ["Review stage 3 of 5", "Supporting evidence present. Testimony exceeds format."],
+  ["Review stage 4 of 5", "Labor recorded. Usefulness and integration remain under review."],
+  ["Review stage 5 of 5", "Application remains open. Waiting is retained as procedure."]
 ];
 
 const officeVoices = [
@@ -121,13 +131,123 @@ const inspectionQuestions = [
   "Routing check: one document request opens another document request."
 ];
 
-const witnessRecords = [
-  "statement unavailable",
-  "record incomplete",
-  "statement not attached",
-  "experience outside accepted format",
-  "harm requires official translation",
-  "testimony exceeds field length"
+const fieldLabelSets = [
+  {
+    name: "Name",
+    birth: "Place of birth",
+    address: "Current address",
+    language: "Native language",
+    reason: "Reason for staying"
+  },
+  {
+    name: "Recorded name",
+    birth: "Birth record",
+    address: "Residence claim",
+    language: "Language declared",
+    reason: "Stated reason"
+  },
+  {
+    name: "Name as processed",
+    birth: "Origin record",
+    address: "Traceable residence",
+    language: "Language requiring review",
+    reason: "Reason, accepted format only"
+  },
+  {
+    name: "Administrative identity",
+    birth: "Former location marker",
+    address: "Temporary/permanent address",
+    language: "Corrected language field",
+    reason: "Usefulness and integration statement"
+  },
+  {
+    name: "Case identity",
+    birth: "Archived origin field",
+    address: "Residence without confirmation",
+    language: "Language evidence",
+    reason: "Final explanation, non-final"
+  }
+];
+
+const reasonLimits = [260, 220, 180, 140, 96];
+
+const institutionalLogs = [
+  [
+    "Case opened. Pending.",
+    "Identity entered. Recognition unresolved.",
+    "Review remains active."
+  ],
+  [
+    "Language corrected. Intent pending.",
+    "Statement converted to administrative format.",
+    "Translation accepted with loss."
+  ],
+  [
+    "Supporting evidence incomplete.",
+    "Unofficial memory rejected as format.",
+    "Testimony exceeds field length."
+  ],
+  [
+    "Labor registered. Usefulness pending.",
+    "Gratitude not measurable.",
+    "Integration claim requires further proof."
+  ],
+  [
+    "Completion reopened.",
+    "Pending condition retained.",
+    "Case remains almost processed."
+  ]
+];
+
+const evidenceCaptionSets = [
+  [
+    "statement unavailable",
+    "record incomplete",
+    "statement not attached",
+    "experience outside accepted format",
+    "harm requires official translation",
+    "testimony exceeds field length"
+  ],
+  [
+    "origin file missing",
+    "current file incomplete",
+    "language note detached",
+    "unofficial memory",
+    "labor trace unconfirmed",
+    "gratitude field blank"
+  ],
+  [
+    "format rejected",
+    "scan cropped",
+    "attachment expired",
+    "witness not processed",
+    "proof too personal",
+    "document unavailable"
+  ],
+  [
+    "usefulness pending",
+    "integration checkbox unresolved",
+    "contradiction retained",
+    "work recorded, home pending",
+    "agency noted, status unchanged",
+    "explanation too long"
+  ],
+  [
+    "case still open",
+    "confirmation missing",
+    "near home is not home",
+    "waiting accepted",
+    "arrival detected",
+    "belonging pending"
+  ]
+];
+
+const exhibitionMessages = [
+  "Automated review opened another requirement.",
+  "Case almost complete. Confirmation unavailable.",
+  "Supporting evidence reclassified.",
+  "Completed status reopened.",
+  "Pending condition retained."
 ];
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -143,6 +263,7 @@ const homeRecord = document.querySelector("#homeRecord");
 const mapDot = document.querySelector("#mapDot");
 const form = document.querySelector("#residenceForm");
 const formStatus = document.querySelector("#formStatus");
+const requirementRecord = document.querySelector("#requirementRecord");
 const submitButton = document.querySelector("#submitButton");
 const resetButton = document.querySelector("#resetButton");
 const eventLog = document.querySelector("#eventLog");
@@ -150,7 +271,18 @@ const birthPlace = document.querySelector("#birthPlace");
 const birthPlaceMessage = document.querySelector("#birthPlaceMessage");
 const currentAddress = document.querySelector("#currentAddress");
 const currentAddressMessage = document.querySelector("#currentAddressMessage");
+const reasonForStaying = document.querySelector("#reasonForStaying");
+const reasonConstraint = document.querySelector("#reasonConstraint");
+const protocolStatus = document.querySelector("#protocolStatus");
+const deadLinks = Array.from(document.querySelectorAll("[data-dead-link]"));
 const termNodes = Array.from(document.querySelectorAll("[data-term]"));
+const fieldLabels = {
+  name: document.querySelector("#personNameLabel"),
+  birth: document.querySelector("#birthPlaceLabel"),
+  address: document.querySelector("#currentAddressLabel"),
+  language: document.querySelector("#nativeLanguageLabel"),
+  reason: document.querySelector("#reasonForStayingLabel")
+};
 const applicantRole = document.querySelector("#applicantRole");
 const actTitle = document.querySelector("#actTitle");
 const actDescription = document.querySelector("#actDescription");
@@ -160,6 +292,8 @@ const inspectionQuestion = document.querySelector("#inspectionQuestion");
 const translationInput = document.querySelector("#translationInput");
 const translationOutput = document.querySelector("#translationOutput");
 const recordCaptions = Array.from(document.querySelectorAll("[data-record-caption]"));
+const params = new URLSearchParams(window.location.search);
+const exhibitionMode = params.get("mode") === "exhibition";
 
 let progress = 91.4;
 let phraseIndex = 0;
@@ -167,6 +301,8 @@ let mapIndex = -1;
 let attempts = 0;
 let progressTarget = 96.4;
 let voiceIndex = 0;
+let requirementCount = 0;
+let resetCount = 0;
 
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -244,8 +380,44 @@ function addLog(message) {
   }
 }
 
+function stageIndex() {
+  return Math.min(Math.floor(attempts / 2), acts.length - 1);
+}
+
+function updateReasonConstraint() {
+  const limit = Number(reasonForStaying.maxLength);
+  const remaining = Math.max(0, limit - reasonForStaying.value.length);
+  reasonConstraint.textContent = `maximum explanation: ${limit} characters / remaining: ${remaining}`;
+}
+
+function renderPressureState() {
+  const level = stageIndex();
+  const labels = fieldLabelSets[level];
+  const captions = evidenceCaptionSets[level];
+
+  fieldLabels.name.textContent = labels.name;
+  fieldLabels.birth.textContent = labels.birth;
+  fieldLabels.address.textContent = labels.address;
+  fieldLabels.language.textContent = labels.language;
+  fieldLabels.reason.textContent = labels.reason;
+
+  reasonForStaying.maxLength = reasonLimits[level];
+  if (reasonForStaying.value.length > reasonForStaying.maxLength) {
+    reasonForStaying.value = reasonForStaying.value.slice(0, reasonForStaying.maxLength);
+  }
+  reasonForStaying.rows = Math.max(2, 4 - Math.min(level, 2));
+  updateReasonConstraint();
+
+  requirementRecord.textContent = `requirements opened: ${requirementCount}`;
+  submitButton.textContent = attempts === 0 ? "Continue" : submitStates[Math.min(level, submitStates.length - 1)];
+
+  recordCaptions.forEach((caption, index) => {
+    caption.textContent = captions[(index + attempts) % captions.length];
+  });
+}
+
 function renderScene() {
-  const act = acts[Math.min(Math.floor(attempts / 2), acts.length - 1)];
+  const act = acts[stageIndex()];
   const role = applicantRoles[attempts % applicantRoles.length];
   const voice = officeVoices[(voiceIndex + attempts) % officeVoices.length];
   const translation = translationScenes[attempts % translationScenes.length];
@@ -259,22 +431,21 @@ function renderScene() {
   inspectionQuestion.textContent = question;
   translationInput.textContent = translation[0];
   translationOutput.textContent = translation[1];
-
-  recordCaptions.forEach((caption, index) => {
-    caption.textContent = witnessRecords[(index + attempts) % witnessRecords.length];
-  });
 }
 
 function nudge(message) {
   attempts += 1;
-  root.style.setProperty("--pressure", String(Math.min(attempts, 8)));
+  root.style.setProperty("--pressure", String(Math.min(attempts, 12)));
   progress = clamp(progress - (0.18 + Math.random() * 0.6), 84.2, 96.9);
   renderProgress();
   renderScene();
+  renderPressureState();
 
   if (message) {
     formStatus.textContent = message;
     addLog(message);
+  } else {
+    addLog(pick(institutionalLogs[stageIndex()]));
   }
 }
 
@@ -298,9 +469,11 @@ function showSuggestions(input) {
 
       if (input === birthPlace) {
         birthPlaceMessage.textContent = "Did you mean somewhere closer?";
+        requirementCount += 1;
         nudge("Previous country archived.");
       } else {
         currentAddressMessage.textContent = "Address accepted, belonging pending.";
+        requirementCount += 1;
         nudge("Address accepted, belonging pending.");
       }
     });
@@ -332,25 +505,25 @@ function questionAddress() {
 
 function resetExperience() {
   form.reset();
-  attempts = 0;
-  progress = 91.4;
-  progressTarget = 96.4;
-  phraseIndex = 0;
-  mapIndex = -1;
-  voiceIndex = 0;
-  root.style.setProperty("--pressure", "0");
-  loadingPhrase.textContent = phrases[0];
-  formStatus.textContent = "The system found several versions of you.";
-  birthPlaceMessage.textContent = "waiting for origin";
-  currentAddressMessage.textContent = "current address uncertain";
-  submitButton.textContent = "Continue";
-  eventLog.replaceChildren();
-  ["Language preference changed automatically.", "You are almost there."].forEach(addLog);
+  resetCount += 1;
+  requirementCount += 1;
+  attempts = Math.max(attempts + 1, 1);
+  progress = clamp(progress - 1.1, 84.2, 96.9);
+  progressTarget = Math.min(progressTarget, 94.8);
+  root.style.setProperty("--pressure", String(Math.min(attempts, 12)));
+  loadingPhrase.textContent = "Application remains open.";
+  protocolStatus.textContent = `POST /case/restart -> 202 PENDING / restart ${resetCount}`;
+  formStatus.textContent = "Restart accepted. Pending condition retained.";
+  birthPlaceMessage.textContent = "origin cleared; review retained";
+  currentAddressMessage.textContent = "address cleared; trace retained";
   hideSuggestions(birthPlace);
   hideSuggestions(currentAddress);
   renderScene();
+  renderPressureState();
   renderProgress();
   updateMap();
+  addLog("Restart accepted. Pending condition retained.");
+  addLog("Case HOME-00097 remains open.");
 }
 
 birthPlace.addEventListener("focus", () => showSuggestions(birthPlace));
@@ -370,6 +543,8 @@ currentAddress.addEventListener("input", () => {
   }
 });
 
+reasonForStaying.addEventListener("input", updateReasonConstraint);
+
 document.addEventListener("click", (event) => {
   if (!event.target.closest(".autocomplete-field")) {
     hideSuggestions(birthPlace);
@@ -379,18 +554,53 @@ document.addEventListener("click", (event) => {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const status = pick(submitStates);
-  submitButton.textContent = status;
+  requirementCount += 1;
+  const level = stageIndex();
+  const status = submitStates[Math.min(level + 1, submitStates.length - 1)];
+  protocolStatus.textContent = `POST /case/HOME-00097 -> 202 PENDING / requirement ${requirementCount}`;
   nudge(status);
+  addLog(pick(institutionalLogs[stageIndex()]));
 });
 
 resetButton.addEventListener("click", resetExperience);
 
+deadLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    requirementCount += 1;
+    protocolStatus.textContent = `GET /${link.dataset.deadLink}.html -> 404 DOCUMENT UNAVAILABLE`;
+    nudge("Document unavailable. Requirement retained.");
+    addLog("404: document unavailable / pending retained.");
+  });
+});
+
+function runExhibitionStep() {
+  requirementCount += 1;
+  protocolStatus.textContent = `AUTO /gallery-review -> 202 PENDING / requirement ${requirementCount}`;
+  nudge(pick(exhibitionMessages));
+  updateMap();
+  if (Math.random() < 0.5) {
+    updatePhrase();
+  }
+}
+
 renderProgress();
 renderScene();
+renderPressureState();
 updateMap();
 
 window.setInterval(updateProgress, reducedMotion ? 5200 : 1400);
 window.setInterval(updatePhrase, reducedMotion ? 7200 : 4300);
 window.setInterval(updateMap, reducedMotion ? 8200 : 5200);
 window.setInterval(shiftLanguage, reducedMotion ? 9800 : 7200);
+
+if (exhibitionMode) {
+  addLog("Exhibition mode: automatic review pending.");
+  protocolStatus.textContent = "AUTO /exhibition-mode -> 202 PENDING";
+
+  if (reducedMotion) {
+    addLog("Automatic review paused by reduced motion preference.");
+  } else {
+    window.setInterval(runExhibitionStep, 6800);
+  }
+}

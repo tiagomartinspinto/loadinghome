@@ -8,7 +8,6 @@
       content="Auto da Espera is a minimalist administrative web artwork about a case that remains almost processed."
     />
     <title>Auto da Espera</title>
-    <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -53,6 +52,13 @@
             </div>
           </div>
         </section>
+
+        <div class="protocol-row" aria-label="Browser status residue">
+          <span id="protocolStatus">GET /home/confirm -> 202 PENDING</span>
+          <a href="#document-unavailable" data-dead-link="confirmation">confirmation.html</a>
+          <a href="#document-unavailable" data-dead-link="print">print record</a>
+          <a href="#document-unavailable" data-dead-link="archive">open archive</a>
+        </div>
       </header>
 
       <section class="panel scene-panel" aria-labelledby="scene-title">
@@ -81,37 +87,39 @@
             <p class="kicker">form 97 / residence</p>
             <h2 id="form-title">Identity and residence fields</h2>
             <p id="formStatus" aria-live="polite">The system found several versions of you.</p>
+            <p id="requirementRecord" class="system-note">requirements opened: 0</p>
           </div>
 
           <form id="residenceForm" class="residence-form" autocomplete="off" novalidate>
             <div class="field-grid">
               <div class="field">
-                <label for="personName"><span data-term="name">Name</span></label>
+                <label for="personName"><span id="personNameLabel">Name</span></label>
                 <input id="personName" name="personName" type="text" />
               </div>
 
               <div class="field autocomplete-field">
-                <label for="birthPlace">Place of birth</label>
+                <label for="birthPlace"><span id="birthPlaceLabel">Place of birth</span></label>
                 <input id="birthPlace" name="birthPlace" type="text" aria-describedby="birthPlaceMessage" />
                 <p id="birthPlaceMessage" class="field-message" aria-live="polite">waiting for origin</p>
                 <ul id="birthPlaceSuggestions" class="suggestions" role="listbox" hidden></ul>
               </div>
 
               <div class="field autocomplete-field">
-                <label for="currentAddress"><span data-term="address">Address</span></label>
+                <label for="currentAddress"><span id="currentAddressLabel">Current address</span></label>
                 <input id="currentAddress" name="currentAddress" type="text" aria-describedby="currentAddressMessage" />
                 <p id="currentAddressMessage" class="field-message" aria-live="polite">current address uncertain</p>
                 <ul id="currentAddressSuggestions" class="suggestions" role="listbox" hidden></ul>
               </div>
 
               <div class="field">
-                <label for="nativeLanguage">Native language</label>
+                <label for="nativeLanguage"><span id="nativeLanguageLabel">Native language</span></label>
                 <input id="nativeLanguage" name="nativeLanguage" type="text" />
               </div>
 
               <div class="field field-wide">
-                <label for="reasonForStaying"><span data-term="reason">Reason</span> for staying</label>
-                <textarea id="reasonForStaying" name="reasonForStaying" rows="4"></textarea>
+                <label for="reasonForStaying"><span id="reasonForStayingLabel">Reason for staying</span></label>
+                <textarea id="reasonForStaying" name="reasonForStaying" rows="4" maxlength="260"></textarea>
+                <p id="reasonConstraint" class="field-message" aria-live="polite">maximum explanation: 260 characters</p>
               </div>
             </div>
 

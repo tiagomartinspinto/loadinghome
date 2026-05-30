@@ -45,8 +45,19 @@ https://tiagomartinspinto.github.io/loadinghome/
 - Birthplace and address fields show fake browser-like suggestions.
 - The form never submits anywhere; each attempt leaves the application open.
 - Internal review notes and review stages shift as the case is repeatedly checked.
-- `start again` resets the in-page interaction state.
+- Repeated attempts increase procedural pressure: labels harden, explanations become more constrained, requirements accumulate, and evidence captions become more procedural.
+- `start again` clears fields but keeps the pending condition active.
+
+## Exhibition Mode
+
+Append `?mode=exhibition` to slowly simulate review activity for gallery display:
+
+```text
+https://tiagomartinspinto.github.io/loadinghome/?mode=exhibition
+```
+
+The mode opens pending reviews, updates case notes, changes supporting evidence captions, and never completes the case. Automatic review pauses when `prefers-reduced-motion` is enabled.
 
 ## Privacy
 
-No analytics, tracking, external APIs, or uploads are used. Form entries stay only in the current browser session. The app does not use `localStorage`; any interaction state is temporary and local to the current page session.
+No analytics, tracking, external APIs, cookies, or uploads are used. Form entries stay only in the current browser session. The app does not use `localStorage`; any interaction state is temporary and local to the current page session.
