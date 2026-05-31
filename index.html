@@ -23,7 +23,7 @@
         <h1 id="artwork-title">Auto da Espera</h1>
 
         <p class="intro-subtitle">A morality form in five pending acts.</p>
-        <p class="intro-note">Your home is being prepared. Some documents are still missing.</p>
+        <p class="intro-note">You have arrived. The case has not.</p>
 
         <section class="loading-panel" aria-label="Loading progress">
           <div class="loading-copy">
@@ -31,12 +31,12 @@
               <span data-term="loading">Loading</span> / <span data-term="home">Home</span>
             </p>
             <p id="loadingPhrase" aria-live="polite">Loading home...</p>
-            <p class="small-note">Almost is a country.</p>
+            <p class="small-note">Almost complete is the decision.</p>
           </div>
 
           <div class="progress-block">
             <div class="progress-meta">
-              <span>application transfer</span>
+              <span>case completion</span>
               <output id="progressOutput" for="homeProgress">91.4%</output>
             </div>
             <div
@@ -65,7 +65,7 @@
         <div class="panel-heading">
           <p class="kicker">internal review</p>
           <h2 id="scene-title">Case review remains pending</h2>
-          <p id="applicantRole" aria-live="polite">Applicant record remains open.</p>
+          <p id="applicantRole" aria-live="polite">The system found you, but not as a person.</p>
         </div>
 
         <div class="scene-grid" aria-live="polite">
@@ -86,7 +86,7 @@
           <div class="panel-heading">
             <p class="kicker">form 97 / residence</p>
             <h2 id="form-title">Identity and residence fields</h2>
-            <p id="formStatus" aria-live="polite">The system found several versions of you.</p>
+            <p id="formStatus" aria-live="polite">Your life does not fit the file.</p>
             <p id="requirementRecord" class="system-note">requirements opened: 0</p>
           </div>
 
@@ -100,14 +100,14 @@
               <div class="field autocomplete-field">
                 <label for="birthPlace"><span id="birthPlaceLabel">Place of birth</span></label>
                 <input id="birthPlace" name="birthPlace" type="text" aria-describedby="birthPlaceMessage" />
-                <p id="birthPlaceMessage" class="field-message" aria-live="polite">waiting for origin</p>
+                <p id="birthPlaceMessage" class="field-message" aria-live="polite">origin must justify current presence</p>
                 <ul id="birthPlaceSuggestions" class="suggestions" role="listbox" hidden></ul>
               </div>
 
               <div class="field autocomplete-field">
                 <label for="currentAddress"><span id="currentAddressLabel">Current address</span></label>
                 <input id="currentAddress" name="currentAddress" type="text" aria-describedby="currentAddressMessage" />
-                <p id="currentAddressMessage" class="field-message" aria-live="polite">current address uncertain</p>
+                <p id="currentAddressMessage" class="field-message" aria-live="polite">address valid; person not confirmed</p>
                 <ul id="currentAddressSuggestions" class="suggestions" role="listbox" hidden></ul>
               </div>
 
@@ -119,7 +119,7 @@
               <div class="field field-wide">
                 <label for="reasonForStaying"><span id="reasonForStayingLabel">Reason for staying</span></label>
                 <textarea id="reasonForStaying" name="reasonForStaying" rows="4" maxlength="260"></textarea>
-                <p id="reasonConstraint" class="field-message" aria-live="polite">maximum explanation: 260 characters</p>
+                <p id="reasonConstraint" class="field-message" aria-live="polite">field limit: 260 characters; reason may be reduced</p>
               </div>
             </div>
 
@@ -144,7 +144,7 @@
             <span id="mapDot" class="map-dot" aria-hidden="true"></span>
             <span class="map-label label-a">Origin country?</span>
             <span class="map-label label-b">Current country?</span>
-            <span class="map-label label-c">near home</span>
+            <span class="map-label label-c">not confirmed</span>
           </div>
 
           <dl class="coordinate-list">
@@ -165,14 +165,14 @@
           <div class="inspection-box" aria-live="polite">
             <div>
               <p class="scene-label">inspection</p>
-              <p id="inspectionQuestion">How many winters until arrival becomes residence?</p>
+              <p id="inspectionQuestion">Residence duration is not proof of belonging.</p>
             </div>
             <div>
               <p class="scene-label">translation</p>
               <p>
-                <span id="translationInput">I live here</span>
+                <span id="translationInput">Statement: I live here</span>
                 <span aria-hidden="true"> -&gt; </span>
-                <span id="translationOutput">temporary presence detected.</span>
+                <span id="translationOutput">Recorded as: presence without belonging.</span>
               </p>
             </div>
           </div>
@@ -199,7 +199,7 @@
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-blur" role="img" aria-label="Unclear evidence placeholder"></div>
-            <figcaption data-record-caption>witness not heard</figcaption>
+            <figcaption data-record-caption>witness not processed</figcaption>
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-archived" role="img" aria-label="Archived evidence frame">
@@ -209,13 +209,13 @@
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-cropped" role="img" aria-label="Cropped fragment placeholder"></div>
-            <figcaption data-record-caption>pain requires official translation</figcaption>
+            <figcaption data-record-caption>harm requires official translation</figcaption>
           </figure>
           <figure class="archive-item">
             <div class="archive-frame is-missing" role="img" aria-label="File not found">
               <span>file not found</span>
             </div>
-            <figcaption data-record-caption>testimony too complex</figcaption>
+            <figcaption data-record-caption>testimony exceeds field length</figcaption>
           </figure>
         </div>
       </section>
@@ -223,8 +223,8 @@
       <aside class="status-panel" aria-labelledby="status-title">
         <h2 id="status-title">Status log</h2>
         <ul id="eventLog" class="event-log" aria-live="polite">
-          <li>Language preference changed automatically.</li>
-          <li>You are almost there.</li>
+          <li>Address valid. Belonging not accepted.</li>
+          <li>Case opened. Person pending.</li>
         </ul>
       </aside>
     </main>

@@ -10,16 +10,16 @@ if (viteBase) {
 }
 
 const phrases = [
-  "Loading home...",
-  "Verifying residence...",
-  "Translating memory...",
-  "Checking belonging...",
-  "Waiting for confirmation...",
-  "Recalculating origin...",
-  "Almost there...",
+  "Loading home record...",
+  "Verifying residence claim...",
+  "Converting life to file...",
+  "Checking belonging: not confirmed.",
+  "Home requires confirmation.",
+  "Origin required again.",
+  "Almost complete is the decision.",
   "Address accepted, belonging pending.",
-  "Your home is being prepared.",
-  "Some documents are still missing.",
+  "You live here. The system disagrees.",
+  "Your life does not fit the file.",
   "Application remains open."
 ];
 
@@ -36,29 +36,29 @@ const dictionary = {
 const mapStates = [
   ["Locating...", "Previous address found", "checking records", "Home not confirmed", "translate(54%, 62%)"],
   ["Origin country?", "Birth record visible", "Departure point archived", "Home not confirmed", "translate(22%, 70%)"],
-  ["Current country?", "Current address uncertain", "Arrival point pending", "Near home", "translate(68%, 34%)"],
+  ["Current country?", "Address valid", "Arrival point pending", "Person not confirmed", "translate(68%, 34%)"],
   ["Previous address found", "Previous address found", "Former home responding", "Home not confirmed", "translate(38%, 50%)"],
-  ["Host city unresolved", "Temporary home", "Administrative region unknown", "belonging pending", "translate(72%, 58%)"],
+  ["Host city unresolved", "Temporary home", "Administrative region unknown", "presence accepted, belonging pending", "translate(72%, 58%)"],
   ["Elsewhere detected", "Unverified location", "Not here", "Not there", "translate(44%, 38%)"],
-  ["Near home", "near home", "close enough", "almost accepted", "translate(60%, 46%)"]
+  ["Near home", "near home", "close enough", "not enough", "translate(60%, 46%)"]
 ];
 
 const rejectionMessages = [
-  "This location is not recognized as current.",
-  "Please enter a more relevant origin.",
+  "Birthplace is not accepted as current proof.",
+  "Enter an origin the file can use.",
   "Birthplace does not match present records.",
-  "Did you mean somewhere closer?",
+  "The system prefers somewhere closer.",
   "Previous country archived.",
   "Birth record found, belonging unresolved.",
-  "Origin accepted, arrival pending."
+  "Origin accepted. Arrival still pending."
 ];
 
 const addressMessages = [
-  "Address accepted, belonging pending.",
-  "Current location requires further verification.",
-  "Temporary address recorded as permanent.",
+  "The address is valid. You are not.",
+  "Current location requires more proof.",
+  "Temporary address recorded as permanent liability.",
   "Host city unresolved.",
-  "Residence detected, home not confirmed."
+  "Residence detected. Home not confirmed."
 ];
 
 const submitStates = [
@@ -80,7 +80,7 @@ const suggestions = [
   "Temporary address with permanent consequences",
   "Former home",
   "Administrative region unknown",
-  "Elsewhere"
+  "Valid address, invalid belonging"
 ];
 
 const applicantRoles = [
@@ -92,43 +92,43 @@ const applicantRoles = [
 ];
 
 const acts = [
-  ["Review stage 1 of 5", "Identity fields accepted. Recognition unresolved."],
-  ["Review stage 2 of 5", "Language accepted after intention is corrected."],
-  ["Review stage 3 of 5", "Supporting evidence present. Testimony exceeds format."],
-  ["Review stage 4 of 5", "Labor recorded. Usefulness and integration remain under review."],
-  ["Review stage 5 of 5", "Application remains open. Waiting is retained as procedure."]
+  ["Review stage 1 of 5", "Identity accepted as data. Person not confirmed."],
+  ["Review stage 2 of 5", "Language accepted. Meaning changed."],
+  ["Review stage 3 of 5", "Evidence accepted as file. Memory rejected."],
+  ["Review stage 4 of 5", "Work accepted. Belonging not accepted."],
+  ["Review stage 5 of 5", "You can stay in the process."]
 ];
 
 const officeVoices = [
-  ["Internal comment", "The form asks for a smaller version of the record."],
-  ["Eligibility note", "Almost is accepted as proof of effort, not as arrival."],
-  ["Origin check", "The previous address is still responding."],
-  ["Former address archive", "A former home remains active in the file."],
-  ["Witness record", "The witness is present but not processed."],
-  ["Translation review", "The sentence is corrected until intent no longer belongs to it."],
-  ["Document request", "One request opens into another request."],
-  ["Queue status", "Previous hesitation retained."],
-  ["Stamp status", "Authorization not applied."],
-  ["Boundary rule", "Rule not visible. Delay active."],
+  ["Internal comment", "The form needs a smaller version of you."],
+  ["Eligibility note", "Almost complete is the decision."],
+  ["Origin check", "Your life does not fit the file."],
+  ["Former address archive", "The old address counts more than the current life."],
+  ["Witness record", "Your memory is not accepted as evidence."],
+  ["Translation review", "Your sentence is corrected until it is not yours."],
+  ["Document request", "Every answer creates another requirement."],
+  ["Queue status", "You can stay in the process."],
+  ["Stamp status", "Approval withheld. Labor retained."],
+  ["Boundary rule", "You live here. The system disagrees."],
   ["Pending case group", "pending, pending, pending."]
 ];
 
 const translationScenes = [
-  ["Statement: I live here", "Recorded as: temporary presence detected."],
-  ["Statement: I work here", "Recorded as: economic usefulness pending."],
+  ["Statement: I live here", "Recorded as: address valid, person not confirmed."],
+  ["Statement: I work here", "Recorded as: labor accepted before presence."],
   ["Statement: I belong here", "Recorded as: unsupported claim."],
-  ["Statement: I remember home", "Recorded as: memory must match accepted format."],
-  ["Statement: I am here", "Recorded as: arrival detected, belonging pending."],
-  ["Statement: I will stay", "Recorded as: future presence requires review."]
+  ["Statement: I remember home", "Recorded as: memory is not evidence."],
+  ["Statement: I am here", "Recorded as: arrival detected, person pending."],
+  ["Statement: I will stay", "Recorded as: process may continue."]
 ];
 
 const inspectionQuestions = [
-  "Internal query: how many winters until arrival becomes residence?",
+  "Identity check: the system found you, but not as a person.",
   "Required selection: useful / grateful / invisible / integrated",
-  "Field check: confirm that the name fits the field.",
-  "Translation check: confirm that memory has been translated correctly.",
-  "Silence check: confirm that silence is voluntary.",
-  "Routing check: one document request opens another document request."
+  "Field check: your name must fit the field.",
+  "Evidence check: memory is not accepted as evidence.",
+  "Silence check: no objection has been processed.",
+  "Routing check: every document request opens another request."
 ];
 
 const fieldLabelSets = [
@@ -144,21 +144,21 @@ const fieldLabelSets = [
     birth: "Birth record",
     address: "Residence claim",
     language: "Language declared",
-    reason: "Stated reason"
+    reason: "Reason, shortened"
   },
   {
     name: "Name as processed",
     birth: "Origin record",
     address: "Traceable residence",
     language: "Language requiring review",
-    reason: "Reason, accepted format only"
+    reason: "Reason too large for field"
   },
   {
     name: "Administrative identity",
     birth: "Former location marker",
     address: "Temporary/permanent address",
     language: "Corrected language field",
-    reason: "Usefulness and integration statement"
+    reason: "Usefulness statement"
   },
   {
     name: "Case identity",
@@ -173,14 +173,14 @@ const reasonLimits = [260, 220, 180, 140, 96];
 
 const institutionalLogs = [
   [
-    "Case opened. Pending.",
-    "Identity entered. Recognition unresolved.",
-    "Review remains active."
+    "Case opened. Person pending.",
+    "Identity entered. Person not confirmed.",
+    "Review active. Belonging inactive."
   ],
   [
-    "Language corrected. Intent pending.",
-    "Statement converted to administrative format.",
-    "Translation accepted with loss."
+    "Language corrected. Meaning changed.",
+    "Statement converted. Person reduced.",
+    "Translation accepted. Intent rejected."
   ],
   [
     "Supporting evidence incomplete.",
@@ -188,23 +188,23 @@ const institutionalLogs = [
     "Testimony exceeds field length."
   ],
   [
-    "Labor registered. Usefulness pending.",
-    "Gratitude not measurable.",
-    "Integration claim requires further proof."
+    "Labor registered. Belonging not registered.",
+    "Usefulness accepted. Presence pending.",
+    "Gratitude required. Proof insufficient."
   ],
   [
     "Completion reopened.",
     "Pending condition retained.",
-    "Case remains almost processed."
+    "Almost complete is the decision."
   ]
 ];
 
 const evidenceCaptionSets = [
   [
-    "statement unavailable",
+    "statement too large",
     "record incomplete",
     "statement not attached",
-    "experience outside accepted format",
+    "life outside accepted format",
     "harm requires official translation",
     "testimony exceeds field length"
   ],
@@ -214,28 +214,28 @@ const evidenceCaptionSets = [
     "language note detached",
     "unofficial memory",
     "labor trace unconfirmed",
-    "gratitude field blank"
+    "gratitude not proven"
   ],
   [
     "format rejected",
     "scan cropped",
     "attachment expired",
     "witness not processed",
-    "proof too personal",
+    "proof too human",
     "document unavailable"
   ],
   [
     "usefulness pending",
     "integration checkbox unresolved",
     "contradiction retained",
-    "work recorded, home pending",
+    "work accepted, home pending",
     "agency noted, status unchanged",
     "explanation too long"
   ],
   [
     "case still open",
     "confirmation missing",
-    "near home is not home",
+    "address valid, person invalid",
     "waiting accepted",
     "arrival detected",
     "belonging pending"
@@ -244,7 +244,7 @@ const evidenceCaptionSets = [
 
 const exhibitionMessages = [
   "Automated review opened another requirement.",
-  "Case almost complete. Confirmation unavailable.",
+  "Almost complete is the decision.",
   "Supporting evidence reclassified.",
   "Completed status reopened.",
   "Pending condition retained."
@@ -362,7 +362,7 @@ function shiftLanguage() {
   node.classList.add("term-change");
 
   if (Math.random() < 0.25) {
-    addLog("Language preference changed automatically.");
+    addLog("Language preference changed without consent.");
   }
 }
 
@@ -387,7 +387,7 @@ function stageIndex() {
 function updateReasonConstraint() {
   const limit = Number(reasonForStaying.maxLength);
   const remaining = Math.max(0, limit - reasonForStaying.value.length);
-  reasonConstraint.textContent = `maximum explanation: ${limit} characters / remaining: ${remaining}`;
+  reasonConstraint.textContent = `field limit: ${limit} characters / remaining: ${remaining}`;
 }
 
 function renderPressureState() {
@@ -423,7 +423,7 @@ function renderScene() {
   const translation = translationScenes[attempts % translationScenes.length];
   const question = inspectionQuestions[(attempts + Math.max(mapIndex, 0)) % inspectionQuestions.length];
 
-  applicantRole.textContent = `${role} / recognition unresolved.`;
+  applicantRole.textContent = `${role} / person not accepted.`;
   actTitle.textContent = act[0];
   actDescription.textContent = act[1];
   voiceSpeaker.textContent = voice[0];
@@ -513,16 +513,16 @@ function resetExperience() {
   root.style.setProperty("--pressure", String(Math.min(attempts, 12)));
   loadingPhrase.textContent = "Application remains open.";
   protocolStatus.textContent = `POST /case/restart -> 202 PENDING / restart ${resetCount}`;
-  formStatus.textContent = "Restart accepted. Pending condition retained.";
-  birthPlaceMessage.textContent = "origin cleared; review retained";
-  currentAddressMessage.textContent = "address cleared; trace retained";
+  formStatus.textContent = "Start again. The condition remains.";
+  birthPlaceMessage.textContent = "origin cleared; suspicion retained";
+  currentAddressMessage.textContent = "address cleared; status unchanged";
   hideSuggestions(birthPlace);
   hideSuggestions(currentAddress);
   renderScene();
   renderPressureState();
   renderProgress();
   updateMap();
-  addLog("Restart accepted. Pending condition retained.");
+  addLog("Start again. The condition remains.");
   addLog("Case HOME-00097 remains open.");
 }
 
@@ -569,8 +569,8 @@ deadLinks.forEach((link) => {
     event.preventDefault();
     requirementCount += 1;
     protocolStatus.textContent = `GET /${link.dataset.deadLink}.html -> 404 DOCUMENT UNAVAILABLE`;
-    nudge("Document unavailable. Requirement retained.");
-    addLog("404: document unavailable / pending retained.");
+    nudge("Document unavailable. Requirement still required.");
+    addLog("404: document unavailable / requirement retained.");
   });
 });
 
@@ -595,11 +595,11 @@ window.setInterval(updateMap, reducedMotion ? 8200 : 5200);
 window.setInterval(shiftLanguage, reducedMotion ? 9800 : 7200);
 
 if (exhibitionMode) {
-  addLog("Exhibition mode: automatic review pending.");
+  addLog("Automatic review active. No completion available.");
   protocolStatus.textContent = "AUTO /exhibition-mode -> 202 PENDING";
 
   if (reducedMotion) {
-    addLog("Automatic review paused by reduced motion preference.");
+    addLog("Automatic review paused. Pending condition retained.");
   } else {
     window.setInterval(runExhibitionStep, 6800);
   }

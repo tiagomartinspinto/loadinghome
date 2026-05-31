@@ -5,7 +5,7 @@
 - Created a lightweight Vite app using vanilla JavaScript and CSS.
 - Built the first version of `Auto da Espera`.
 - Reframed `Loading Home: 97%` as an internal system/status phrase rather than the main title.
-- Added the subtitle `A morality form in five pending acts.` and a small footer note explaining the title.
+- Added the subtitle `A morality form in five pending acts.`; title explanation is kept in README only.
 - Added a thin loading bar that moves within an almost-complete range and never reaches `100%`.
 - Added quiet rotating loading text.
 - Added a sparse missing-photo archive with blank frames, gray placeholders, and small captions.
@@ -21,6 +21,8 @@
 - Added `?mode=exhibition` to slowly simulate pending review activity without completing the case, with reduced-motion support.
 - Imported CSS from `src/main.js` and removed the direct stylesheet link from `index.html` while keeping a source-mode stylesheet fallback for branch-based Pages serving.
 - Removed the visible in-artwork explanation of the title so the interface remains less didactic; README retains the contextual title note.
+- Sharpened user-facing language so the administrative voice is colder, more direct, and clearer about labor, residence, evidence, and non-belonging.
+- Replaced softer status, review, translation, evidence, and reset language with more direct administrative refusals while keeping the interface restrained.
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
 - Added a GitHub Pages deployment workflow for building and publishing `dist`.
