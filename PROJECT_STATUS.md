@@ -5,7 +5,7 @@
 - Created a lightweight Vite app using vanilla JavaScript and CSS.
 - Built the first version of `Auto da Espera`.
 - Reframed `Loading Home: 97%` as an internal system/status phrase rather than the main title.
-- Added the subtitle `A morality form in five pending acts.`; title explanation is kept in README only.
+- Replaced the visible subtitle with a colder case-status line; title explanation is kept in README only.
 - Added a thin loading bar that moves within an almost-complete range and never reaches `100%`.
 - Added quiet rotating loading text.
 - Added a sparse missing-photo archive with blank frames, gray placeholders, and small captions.
@@ -13,7 +13,7 @@
 - Added subtle label switching between several languages.
 - Added an administrative form with birthplace rejection, fake autocomplete, impossible submit states, and a reset link.
 - Added a cold internal-review layer inspired by a bureaucratic morality play, with abstract applicant records, review stages, inspection prompts, mistranslation states, and case notes.
-- Reworked the archive language and layout toward missing supporting evidence instead of gallery-like or autobiographical material.
+- Reworked the archive language and layout toward missing supporting evidence instead of gallery-like or identifiable material.
 - Flattened the surface so the page reads more like one continuous administrative record.
 - Strengthened the top case header (`CASE HOME-00097 / STATUS: PENDING / COMPLETION: 97%`) and made `Auto da Espera` quieter on the surface.
 - Added procedural pressure driven by the existing `attempts` state and `--pressure` variable, affecting labels, reason-field limits, requirements, status logs, submit states, and evidence captions.
@@ -23,6 +23,7 @@
 - Removed the visible in-artwork explanation of the title so the interface remains less didactic; README retains the contextual title note.
 - Sharpened user-facing language so the administrative voice is colder, more direct, and clearer about labor, residence, evidence, and non-belonging.
 - Replaced softer status, review, translation, evidence, and reset language with more direct administrative refusals while keeping the interface restrained.
+- Shifted the visual palette toward cold system whites/grays with sparse semantic red, green, and blue for refusal, temporary validity, and protocol residue.
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
 - Added a GitHub Pages deployment workflow for building and publishing `dist`.
@@ -43,7 +44,7 @@
 - Checked the running `/loadinghome/` preview in the browser for document title, quiet `Auto da Espera` heading, case header, supporting evidence, residence trace, form presence, language/map/progress changes, no console errors, and no horizontal overflow.
 - Confirmed `Loading Home: 97%` appears as a system/status phrase, not the main heading.
 - Checked the updated internal-review layer in the browser for review stage labels, applicant record status, inspection prompts, mistranslation text, supporting evidence captions, autocomplete suggestions, impossible submit behavior, and reset behavior.
-- Checked a 390px mobile viewport for single-column application, scene, and archive layout with no horizontal overflow.
+- Checked 1280px desktop and 390px mobile preview widths for responsive layout with no horizontal overflow.
 - Checked the colder administrative layout in preview for case header strength, internal review wording, location verification heading, supporting-evidence rows, autocomplete behavior, review-stage changes, and no console errors.
 - Checked exhibition mode in preview for automatic pending-review updates and no completion.
 - Checked raw static serving with the JavaScript stylesheet fallback after removing the direct stylesheet link.
@@ -68,7 +69,7 @@
 - The map is intentionally symbolic and does not use a geographic API.
 - Fake autocomplete supports pointer and focus interaction, but not custom arrow-key navigation.
 - The loading state is intentionally impossible to complete.
-- One automated fill helper was unavailable in the test browser; keyboard-entry behavior was verified with keypresses, suggestion clicks, submit attempts, and reset.
+- `start again` clears fields and restarts the visible pass, but it intentionally keeps the pending condition active.
 - The morality-play structure is expressed as review stages and internal notes; there are no staged characters or theatrical visuals.
 
 ## Manual Tests To Do Next
@@ -79,5 +80,5 @@
 - Click autocomplete suggestions in birthplace and current address fields.
 - Press `Continue` repeatedly and confirm the form remains open.
 - Confirm the internal notes, inspection question, supporting evidence captions, and review stages change after repeated interactions.
-- Press `start again` and confirm fields, status text, and progress reset.
+- Press `start again` and confirm fields clear while the pending condition remains.
 - Check with reduced motion enabled in the browser or operating system.

@@ -40,7 +40,7 @@ const mapStates = [
   ["Previous address found", "Previous address found", "Former home responding", "Home not confirmed", "translate(38%, 50%)"],
   ["Host city unresolved", "Temporary home", "Administrative region unknown", "presence accepted, belonging pending", "translate(72%, 58%)"],
   ["Elsewhere detected", "Unverified location", "Not here", "Not there", "translate(44%, 38%)"],
-  ["Near home", "near home", "close enough", "not enough", "translate(60%, 46%)"]
+  ["Near home", "address near valid", "accepted approximation", "not enough", "translate(60%, 46%)"]
 ];
 
 const rejectionMessages = [
@@ -71,14 +71,14 @@ const submitStates = [
 ];
 
 const suggestions = [
-  "Home, approximately",
+  "Home, not confirmed",
   "Nearest accepted location",
   "Previous country, archived",
   "Current country, pending",
   "No longer applicable",
-  "Close enough",
+  "Close enough for the file",
   "Temporary address with permanent consequences",
-  "Former home",
+  "Former home, still counted",
   "Administrative region unknown",
   "Valid address, invalid belonging"
 ];
@@ -468,13 +468,13 @@ function showSuggestions(input) {
       list.hidden = true;
 
       if (input === birthPlace) {
-        birthPlaceMessage.textContent = "Did you mean somewhere closer?";
+        birthPlaceMessage.textContent = "Origin accepted only as suspicion.";
         requirementCount += 1;
-        nudge("Previous country archived.");
+        nudge("Previous country archived. Current life discounted.");
       } else {
-        currentAddressMessage.textContent = "Address accepted, belonging pending.";
+        currentAddressMessage.textContent = "Address accepted. Person still pending.";
         requirementCount += 1;
-        nudge("Address accepted, belonging pending.");
+        nudge("Address accepted. Person still pending.");
       }
     });
     item.append(button);
@@ -576,7 +576,7 @@ deadLinks.forEach((link) => {
 
 function runExhibitionStep() {
   requirementCount += 1;
-  protocolStatus.textContent = `AUTO /gallery-review -> 202 PENDING / requirement ${requirementCount}`;
+  protocolStatus.textContent = `AUTO /case-review -> 202 PENDING / requirement ${requirementCount}`;
   nudge(pick(exhibitionMessages));
   updateMap();
   if (Math.random() < 0.5) {

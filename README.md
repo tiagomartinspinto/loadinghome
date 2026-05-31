@@ -1,6 +1,6 @@
 # Auto da Espera
 
-`Auto da Espera` is a minimalist administrative web artwork about immigration as a permanent state of almost-arrival. Its subtitle is `A morality form in five pending acts.` The page keeps trying to load home, verify residence, translate memory, and confirm belonging, but the process never completes. `Loading Home: 97%` remains inside the work as a system/status phrase.
+`Auto da Espera` is a minimalist administrative web artwork about immigration as a permanent state of almost-arrival. The page keeps trying to load home, verify residence, translate memory, and confirm belonging, but the process never completes. `Loading Home: 97%` remains inside the work as a system/status phrase.
 
 The work borrows from quiet government forms, browser loading screens, missing supporting evidence, and incomplete location records. Its emotional pressure comes from small refusals, repeated checks, and the feeling of being almost accepted.
 
