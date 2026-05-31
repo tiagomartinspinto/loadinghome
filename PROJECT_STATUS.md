@@ -26,6 +26,9 @@
 - Shifted the visual palette toward cold system whites/grays with sparse semantic red, green, and blue for refusal, temporary validity, and protocol residue.
 - Tightened the most recent pass for museum/kiosk presentation with larger base text, more deliberate spacing, slower exhibition-mode pacing, less slogan-like copy, and formal evidence record numbering.
 - Made pressure progression less twitchy by reviewing typed fields in deliberate steps rather than reacting to every character.
+- Recast the surface toward a fictional public-service residence/case form with an application record table, disabled case checks, and status rows that never resolve.
+- Switched the artwork to a pure black system palette with white text and semantic red, green, and blue state colors.
+- Self-hosted Lekton locally under `src/assets/fonts/lekton` for offline-friendly museum/kiosk presentation.
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
 - Added a GitHub Pages deployment workflow for building and publishing `dist`.

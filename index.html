@@ -25,6 +25,44 @@
         <p class="intro-subtitle">Case HOME-00097 remains open.</p>
         <p class="intro-note">You have arrived. The case has not.</p>
 
+        <section class="case-register" aria-labelledby="case-register-title">
+          <h2 id="case-register-title">Application record</h2>
+          <dl class="status-table">
+            <div>
+              <dt>01 Application number</dt>
+              <dd>HOME-00097</dd>
+            </div>
+            <div>
+              <dt>02 Customer record</dt>
+              <dd id="customerRecord">PERSON PENDING</dd>
+            </div>
+            <div>
+              <dt>03 Application type</dt>
+              <dd>Residence / belonging confirmation</dd>
+            </div>
+            <div>
+              <dt>04 Processing phase</dt>
+              <dd id="processingPhase">additional review</dd>
+            </div>
+            <div>
+              <dt>05 Decision status</dt>
+              <dd id="decisionStatus">not issued</dd>
+            </div>
+            <div>
+              <dt>06 Attachment status</dt>
+              <dd id="attachmentStatus">insufficient</dd>
+            </div>
+            <div>
+              <dt>07 Labor status</dt>
+              <dd id="laborStatus">accepted</dd>
+            </div>
+            <div>
+              <dt>08 Belonging status</dt>
+              <dd id="belongingStatus">not accepted</dd>
+            </div>
+          </dl>
+        </section>
+
         <section class="loading-panel" aria-label="Loading progress">
           <div class="loading-copy">
             <p class="interface-line">
@@ -121,6 +159,13 @@
                 <textarea id="reasonForStaying" name="reasonForStaying" rows="4" maxlength="260"></textarea>
                 <p id="reasonConstraint" class="field-message" aria-live="polite">field limit: 260 characters; surplus removed</p>
               </div>
+            </div>
+
+            <div class="case-checks" aria-label="Case status checks">
+              <label><input type="checkbox" checked disabled /> address status valid</label>
+              <label><input type="checkbox" disabled /> person status confirmed</label>
+              <label><input type="checkbox" checked disabled /> labor status accepted</label>
+              <label><input type="checkbox" disabled /> belonging status accepted</label>
             </div>
 
             <div class="form-actions">

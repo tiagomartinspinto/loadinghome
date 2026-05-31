@@ -1,8 +1,8 @@
 # Auto da Espera
 
-`Auto da Espera` is a minimalist administrative web artwork about immigration as a permanent state of almost-arrival. The page behaves like a public-service case system: it verifies residence, converts statements into records, reopens requirements, and never completes. `Loading Home: 97%` remains inside the work as a system/status phrase.
+`Auto da Espera` is a minimalist administrative web artwork about immigration as a permanent state of almost-arrival. The page behaves like a fictional public-service case system: it verifies residence, converts statements into records, reopens requirements, and never completes. `Loading Home: 97%` remains inside the work as a system/status phrase.
 
-The work borrows from government forms, browser loading states, missing supporting evidence, and incomplete location records. Its pressure comes from small refusals, repeated checks, and a decision that refuses to call itself final.
+The work borrows from residence-permit forms, browser loading states, missing supporting evidence, and incomplete location records. It does not use official branding, real form IDs, or real instructions. Its pressure comes from small refusals, repeated checks, and a decision that refuses to call itself final.
 
 The title can be read as `The Play of Waiting` or `The Morality Play of Waiting`. It loosely echoes the Portuguese theatrical form `auto`, associated with short allegorical and moral plays, while `espera` means waiting.
 
@@ -63,6 +63,8 @@ The mode opens pending reviews, updates case notes, changes supporting evidence 
 Recommended presentation: fullscreen browser or kiosk mode on a dedicated monitor. The work can be shown interactively or unattended using `?mode=exhibition`.
 
 For gallery display, use a modern desktop browser with the address bar hidden when possible. No server-side component is required after the static build is deployed.
+
+The Lekton font is self-hosted in the repository under the SIL Open Font License, so the deployed artwork does not need a font request to an external service.
 
 ## Privacy
 

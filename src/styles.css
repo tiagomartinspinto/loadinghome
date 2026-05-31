@@ -1,21 +1,37 @@
+@font-face {
+  font-family: "Lekton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/lekton/Lekton-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Lekton";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./assets/fonts/lekton/Lekton-Bold.ttf") format("truetype");
+}
+
 :root {
-  --paper: #f6f7f8;
-  --surface: #ffffff;
-  --ink: #050505;
-  --muted: #3f4347;
-  --quiet: #6e747a;
-  --line: #aeb7bf;
-  --soft-line: #dfe4e8;
-  --accent: #111111;
-  --red: #8d2f2f;
-  --red-bg: #f8eeee;
-  --green: #2f6848;
-  --green-bg: #edf5f0;
-  --blue: #235f9e;
-  --blue-bg: #edf3fa;
+  --paper: #000000;
+  --surface: #000000;
+  --ink: #ffffff;
+  --muted: #d8d8d8;
+  --quiet: #9a9a9a;
+  --line: #3a3a3a;
+  --soft-line: #1f1f1f;
+  --accent: #ffffff;
+  --red: #ff3b30;
+  --red-bg: #160000;
+  --green: #34c759;
+  --green-bg: #001a0a;
+  --blue: #0a84ff;
+  --blue-bg: #001326;
   --pressure: 0;
-  color-scheme: light;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: dark;
+  font-family: "Lekton", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 * {
@@ -100,9 +116,8 @@ a:focus-visible {
   border-bottom: 1px solid var(--ink);
   padding: 0.72rem 0;
   color: var(--ink);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.86rem;
-  font-weight: 650;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -118,14 +133,14 @@ h1 {
   color: var(--muted);
   font-size: 1.12rem;
   line-height: 1.25;
-  font-weight: 520;
+  font-weight: 400;
 }
 
 h2 {
   margin-bottom: 0.32rem;
   font-size: 0.92rem;
   line-height: 1.3;
-  font-weight: 560;
+  font-weight: 700;
 }
 
 .intro-note,
@@ -156,6 +171,59 @@ h2 {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   padding: 16px 0;
+}
+
+.case-register {
+  margin-bottom: 26px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.case-register h2 {
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+
+.status-table {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.status-table div {
+  min-width: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 0.62rem 0.66rem;
+}
+
+.status-table dt {
+  color: var(--quiet);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.status-table dd {
+  margin: 0.24rem 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+#customerRecord,
+#decisionStatus,
+#attachmentStatus,
+#belongingStatus {
+  color: var(--red);
+}
+
+#processingPhase {
+  color: var(--blue);
+}
+
+#laborStatus {
+  color: var(--green);
 }
 
 .loading-copy p {
@@ -220,7 +288,6 @@ h2 {
   border-bottom: 1px solid var(--line);
   padding: 0.64rem 0;
   color: var(--blue);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.72rem;
 }
 
@@ -270,7 +337,7 @@ h2 {
 
 .scene-title-line {
   color: var(--ink);
-  font-weight: 560;
+  font-weight: 700;
 }
 
 .scene-text {
@@ -294,7 +361,6 @@ h2 {
 .system-note {
   margin-top: 0.45rem;
   color: var(--red);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -303,7 +369,7 @@ h2 {
   margin-bottom: 0.36rem;
   color: var(--ink);
   font-size: 0.72rem;
-  font-weight: 650;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -326,13 +392,13 @@ h2 {
 }
 
 .archive-frame {
+  position: relative;
   display: grid;
   min-height: 86px;
   place-items: center;
   padding: 0.65rem;
-  background: #f1f3f5;
+  background: #050505;
   color: var(--quiet);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.68rem;
   text-align: center;
 }
@@ -342,8 +408,7 @@ h2 {
 }
 
 .is-blur {
-  background: #eceff1;
-  filter: blur(0.8px);
+  background: #0d0d0d;
 }
 
 .is-archived {
@@ -352,17 +417,42 @@ h2 {
 }
 
 .is-cropped {
-  background:
-    linear-gradient(90deg, transparent 0 26%, rgba(5, 5, 5, 0.09) 26% 27%, transparent 27%),
-    #f1f3f5;
+  background: #050505;
+}
+
+.is-cropped::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 27%;
+  width: 1px;
+  background: var(--line);
+  content: "";
 }
 
 .is-missing {
-  background:
-    linear-gradient(135deg, transparent 0 calc(50% - 0.5px), rgba(141, 47, 47, 0.42) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-    linear-gradient(45deg, transparent 0 calc(50% - 0.5px), rgba(141, 47, 47, 0.28) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-    var(--red-bg);
+  background: var(--red-bg);
   color: var(--red);
+}
+
+.is-missing::before,
+.is-missing::after {
+  position: absolute;
+  left: 18%;
+  top: 50%;
+  width: 64%;
+  height: 1px;
+  background: var(--red);
+  content: "";
+  opacity: 0.65;
+}
+
+.is-missing::before {
+  transform: rotate(34deg);
+}
+
+.is-missing::after {
+  transform: rotate(-34deg);
 }
 
 .archive-item figcaption {
@@ -380,7 +470,6 @@ h2 {
   flex: 0 0 auto;
   margin-right: 0.35rem;
   color: var(--quiet);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.7rem;
 }
 
@@ -398,10 +487,15 @@ h2 {
   min-height: 260px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background:
-    linear-gradient(90deg, rgba(35, 95, 158, 0.09) 1px, transparent 1px) 0 0 / 48px 48px,
-    linear-gradient(180deg, rgba(35, 95, 158, 0.09) 1px, transparent 1px) 0 0 / 48px 48px,
-    var(--surface);
+  background: var(--surface);
+}
+
+.map-stage::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H48M0 0V48' fill='none' stroke='%231f1f1f' stroke-width='1'/%3E%3C/svg%3E");
+  content: "";
 }
 
 .route {
@@ -437,7 +531,7 @@ h2 {
   position: absolute;
   border: 1px solid var(--line);
   padding: 0.18rem 0.34rem;
-  background: rgba(255, 255, 255, 0.86);
+  background: var(--surface);
   color: var(--blue);
   font-size: 0.74rem;
 }
@@ -554,6 +648,7 @@ textarea {
   padding: 0.62rem 0.68rem;
   background: var(--surface);
   color: var(--ink);
+  caret-color: var(--blue);
 }
 
 textarea {
@@ -566,8 +661,8 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: var(--ink);
-  outline: 1px solid var(--ink);
+  border-color: var(--blue);
+  outline: 1px solid var(--blue);
   outline-offset: -1px;
 }
 
@@ -589,7 +684,6 @@ textarea:focus {
   overflow: auto;
   border: 1px solid var(--line);
   background: var(--surface);
-  box-shadow: 0 8px 18px rgba(5, 5, 5, 0.08);
   list-style: none;
 }
 
@@ -631,13 +725,16 @@ textarea:focus {
   min-height: 40px;
   border: 1px solid var(--ink);
   padding: 0.5rem 0.78rem;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--surface);
+  color: var(--ink);
+  text-transform: uppercase;
 }
 
 .primary-button:hover,
 .primary-button:focus-visible {
+  border-color: var(--red);
   background: var(--red);
+  color: var(--paper);
 }
 
 .reset-button {
@@ -652,6 +749,38 @@ textarea:focus {
 .status-panel {
   border-top: 1px solid var(--line);
   padding-top: 16px;
+}
+
+.case-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.case-checks label {
+  display: flex;
+  align-items: center;
+  gap: 0.48rem;
+  min-height: 38px;
+  margin: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 0.52rem 0.6rem;
+  color: var(--quiet);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.case-checks input {
+  width: 14px;
+  min-height: 14px;
+  height: 14px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--green);
 }
 
 .event-log {
@@ -725,6 +854,8 @@ textarea:focus {
 
   .archive-grid,
   .field-grid,
+  .status-table,
+  .case-checks,
   .coordinate-list {
     grid-template-columns: 1fr;
   }

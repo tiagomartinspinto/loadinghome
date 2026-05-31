@@ -171,6 +171,54 @@ const fieldLabelSets = [
 
 const reasonLimits = [260, 220, 180, 140, 96];
 
+const caseRegisterStates = [
+  {
+    customer: "PERSON PENDING",
+    phase: "additional review",
+    decision: "not issued",
+    attachment: "insufficient",
+    labor: "accepted",
+    belonging: "not accepted",
+    caseStatus: "STATUS: PENDING"
+  },
+  {
+    customer: "PERSON REDUCED",
+    phase: "language review",
+    decision: "not issued",
+    attachment: "format check",
+    labor: "accepted",
+    belonging: "not accepted",
+    caseStatus: "STATUS: INCOMPLETE"
+  },
+  {
+    customer: "PERSON UNCONFIRMED",
+    phase: "evidence review",
+    decision: "withheld",
+    attachment: "insufficient",
+    labor: "accepted",
+    belonging: "not accepted",
+    caseStatus: "STATUS: REOPENED"
+  },
+  {
+    customer: "PERSON CONDITIONAL",
+    phase: "usefulness review",
+    decision: "not issued",
+    attachment: "reclassified",
+    labor: "accepted",
+    belonging: "not accepted",
+    caseStatus: "STATUS: REOPENED"
+  },
+  {
+    customer: "PERSON PENDING",
+    phase: "indefinite review",
+    decision: "not issued",
+    attachment: "insufficient",
+    labor: "accepted",
+    belonging: "not accepted",
+    caseStatus: "STATUS: REOPENED"
+  }
+];
+
 const institutionalLogs = [
   [
     "Case opened. Person pending.",
@@ -267,6 +315,7 @@ const requirementRecord = document.querySelector("#requirementRecord");
 const submitButton = document.querySelector("#submitButton");
 const resetButton = document.querySelector("#resetButton");
 const eventLog = document.querySelector("#eventLog");
+const caseCode = document.querySelector("#caseCode");
 const birthPlace = document.querySelector("#birthPlace");
 const birthPlaceMessage = document.querySelector("#birthPlaceMessage");
 const currentAddress = document.querySelector("#currentAddress");
@@ -274,6 +323,12 @@ const currentAddressMessage = document.querySelector("#currentAddressMessage");
 const reasonForStaying = document.querySelector("#reasonForStaying");
 const reasonConstraint = document.querySelector("#reasonConstraint");
 const protocolStatus = document.querySelector("#protocolStatus");
+const customerRecord = document.querySelector("#customerRecord");
+const processingPhase = document.querySelector("#processingPhase");
+const decisionStatus = document.querySelector("#decisionStatus");
+const attachmentStatus = document.querySelector("#attachmentStatus");
+const laborStatus = document.querySelector("#laborStatus");
+const belongingStatus = document.querySelector("#belongingStatus");
 const deadLinks = Array.from(document.querySelectorAll("[data-dead-link]"));
 const termNodes = Array.from(document.querySelectorAll("[data-term]"));
 const fieldLabels = {
@@ -400,12 +455,20 @@ function renderPressureState() {
   const level = stageIndex();
   const labels = fieldLabelSets[level];
   const captions = evidenceCaptionSets[level];
+  const caseState = caseRegisterStates[level];
 
   fieldLabels.name.textContent = labels.name;
   fieldLabels.birth.textContent = labels.birth;
   fieldLabels.address.textContent = labels.address;
   fieldLabels.language.textContent = labels.language;
   fieldLabels.reason.textContent = labels.reason;
+  caseCode.textContent = caseState.caseStatus;
+  customerRecord.textContent = caseState.customer;
+  processingPhase.textContent = caseState.phase;
+  decisionStatus.textContent = caseState.decision;
+  attachmentStatus.textContent = caseState.attachment;
+  laborStatus.textContent = caseState.labor;
+  belongingStatus.textContent = caseState.belonging;
 
   reasonForStaying.maxLength = reasonLimits[level];
   if (reasonForStaying.value.length > reasonForStaying.maxLength) {
