@@ -20,6 +20,7 @@
 - Added small web-native frictions: dead document links, browser-like protocol residue, unavailable-document responses, and requirements that reopen.
 - Added `?mode=exhibition` to slowly simulate pending review activity without completing the case, with reduced-motion support.
 - Imported CSS from `src/main.js` and removed the direct stylesheet link from `index.html` while keeping a source-mode stylesheet fallback for branch-based Pages serving.
+- Removed the visible in-artwork explanation of the title so the interface remains less didactic; README retains the contextual title note.
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
 - Added a GitHub Pages deployment workflow for building and publishing `dist`.
