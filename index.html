@@ -31,7 +31,7 @@
               <span data-term="loading">Loading</span> / <span data-term="home">Home</span>
             </p>
             <p id="loadingPhrase" aria-live="polite">Loading home record...</p>
-            <p class="small-note">Almost complete is the decision.</p>
+            <p class="small-note">The case is close enough to remain open.</p>
           </div>
 
           <div class="progress-block">
@@ -65,18 +65,18 @@
         <div class="panel-heading">
           <p class="kicker">internal review</p>
           <h2 id="scene-title">Case review remains pending</h2>
-          <p id="applicantRole" aria-live="polite">The system found you, but not as a person.</p>
+          <p id="applicantRole" aria-live="polite">The system found the record before the person.</p>
         </div>
 
         <div class="scene-grid" aria-live="polite">
           <div>
             <p class="scene-label">review sequence</p>
             <p id="actTitle" class="scene-title-line">Review stage 1 of 5</p>
-            <p id="actDescription" class="scene-text">Identity fields accepted. Recognition unresolved.</p>
+            <p id="actDescription" class="scene-text">Identity fields accepted. Recognition withheld.</p>
           </div>
           <div>
             <p id="voiceSpeaker" class="scene-label">internal comment</p>
-            <p id="voiceText" class="scene-text">The form asks for a smaller version of the record.</p>
+            <p id="voiceText" class="scene-text">The file requires a smaller account.</p>
           </div>
         </div>
       </section>
@@ -100,14 +100,14 @@
               <div class="field autocomplete-field">
                 <label for="birthPlace"><span id="birthPlaceLabel">Place of birth</span></label>
                 <input id="birthPlace" name="birthPlace" type="text" aria-describedby="birthPlaceMessage" />
-                <p id="birthPlaceMessage" class="field-message" aria-live="polite">origin must justify current presence</p>
+                <p id="birthPlaceMessage" class="field-message" aria-live="polite">origin must support current presence</p>
                 <ul id="birthPlaceSuggestions" class="suggestions" role="listbox" hidden></ul>
               </div>
 
               <div class="field autocomplete-field">
                 <label for="currentAddress"><span id="currentAddressLabel">Current address</span></label>
                 <input id="currentAddress" name="currentAddress" type="text" aria-describedby="currentAddressMessage" />
-                <p id="currentAddressMessage" class="field-message" aria-live="polite">address valid; person not confirmed</p>
+                <p id="currentAddressMessage" class="field-message" aria-live="polite">address valid; status withheld</p>
                 <ul id="currentAddressSuggestions" class="suggestions" role="listbox" hidden></ul>
               </div>
 
@@ -119,7 +119,7 @@
               <div class="field field-wide">
                 <label for="reasonForStaying"><span id="reasonForStayingLabel">Reason for staying</span></label>
                 <textarea id="reasonForStaying" name="reasonForStaying" rows="4" maxlength="260"></textarea>
-                <p id="reasonConstraint" class="field-message" aria-live="polite">field limit: 260 characters; reason may be reduced</p>
+                <p id="reasonConstraint" class="field-message" aria-live="polite">field limit: 260 characters; surplus removed</p>
               </div>
             </div>
 
@@ -165,14 +165,14 @@
           <div class="inspection-box" aria-live="polite">
             <div>
               <p class="scene-label">inspection</p>
-              <p id="inspectionQuestion">Residence duration is not proof of belonging.</p>
+              <p id="inspectionQuestion">Residence duration is not sufficient evidence.</p>
             </div>
             <div>
               <p class="scene-label">translation</p>
               <p>
                 <span id="translationInput">Statement: I live here</span>
                 <span aria-hidden="true"> -&gt; </span>
-                <span id="translationOutput">Recorded as: presence without belonging.</span>
+                <span id="translationOutput">Recorded as: residence without confirmation.</span>
               </p>
             </div>
           </div>
@@ -183,7 +183,7 @@
         <div class="panel-heading">
           <p class="kicker">supporting evidence</p>
           <h2 id="archive-title">Supporting evidence incomplete</h2>
-          <p>Required evidence is not available in an accepted format.</p>
+          <p>Required evidence is present only in rejected formats.</p>
         </div>
 
         <div class="archive-grid" aria-label="Missing supporting evidence records">

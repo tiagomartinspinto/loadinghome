@@ -12,13 +12,13 @@ if (viteBase) {
 const phrases = [
   "Loading home record...",
   "Verifying residence claim...",
-  "Converting life to file...",
+  "Converting statement to file...",
   "Checking belonging: not confirmed.",
   "Home requires confirmation.",
-  "Origin required again.",
+  "Origin record reopened.",
   "Almost complete is the decision.",
-  "Address accepted, belonging pending.",
-  "You live here. The system disagrees.",
+  "Address validated. Status unchanged.",
+  "Residence entered. Recognition withheld.",
   "Your life does not fit the file.",
   "Application remains open."
 ];
@@ -38,17 +38,17 @@ const mapStates = [
   ["Origin country?", "Birth record visible", "Departure point archived", "Home not confirmed", "translate(22%, 70%)"],
   ["Current country?", "Address valid", "Arrival point pending", "Person not confirmed", "translate(68%, 34%)"],
   ["Previous address found", "Previous address found", "Former home responding", "Home not confirmed", "translate(38%, 50%)"],
-  ["Host city unresolved", "Temporary home", "Administrative region unknown", "presence accepted, belonging pending", "translate(72%, 58%)"],
+  ["Host city unresolved", "Temporary home", "Administrative region unknown", "presence accepted, status pending", "translate(72%, 58%)"],
   ["Elsewhere detected", "Unverified location", "Not here", "Not there", "translate(44%, 38%)"],
-  ["Near home", "address near valid", "accepted approximation", "not enough", "translate(60%, 46%)"]
+  ["Near home", "address near valid", "accepted approximation", "insufficient", "translate(60%, 46%)"]
 ];
 
 const rejectionMessages = [
   "Birthplace is not accepted as current proof.",
   "Enter an origin the file can use.",
   "Birthplace does not match present records.",
-  "The system prefers somewhere closer.",
-  "Previous country archived.",
+  "Origin must be expressed as current relevance.",
+  "Previous jurisdiction archived.",
   "Birth record found, belonging unresolved.",
   "Origin accepted. Arrival still pending."
 ];
@@ -76,7 +76,7 @@ const suggestions = [
   "Previous country, archived",
   "Current country, pending",
   "No longer applicable",
-  "Close enough for the file",
+  "Approximation accepted by file",
   "Temporary address with permanent consequences",
   "Former home, still counted",
   "Administrative region unknown",
@@ -96,21 +96,21 @@ const acts = [
   ["Review stage 2 of 5", "Language accepted. Meaning changed."],
   ["Review stage 3 of 5", "Evidence accepted as file. Memory rejected."],
   ["Review stage 4 of 5", "Work accepted. Belonging not accepted."],
-  ["Review stage 5 of 5", "You can stay in the process."]
+  ["Review stage 5 of 5", "The process may retain the case."]
 ];
 
 const officeVoices = [
-  ["Internal comment", "The form needs a smaller version of you."],
+  ["Internal comment", "The file requires a smaller account."],
   ["Eligibility note", "Almost complete is the decision."],
   ["Origin check", "Your life does not fit the file."],
-  ["Former address archive", "The old address counts more than the current life."],
+  ["Former address archive", "Former address carries higher weight."],
   ["Witness record", "Your memory is not accepted as evidence."],
-  ["Translation review", "Your sentence is corrected until it is not yours."],
+  ["Translation review", "Meaning adjusted to fit the field."],
   ["Document request", "Every answer creates another requirement."],
   ["Queue status", "You can stay in the process."],
   ["Stamp status", "Approval withheld. Labor retained."],
-  ["Boundary rule", "You live here. The system disagrees."],
-  ["Pending case group", "pending, pending, pending."]
+  ["Boundary rule", "Residence entered. Recognition withheld."],
+  ["Pending case group", "Pending cases consolidated."]
 ];
 
 const translationScenes = [
@@ -124,7 +124,7 @@ const translationScenes = [
 
 const inspectionQuestions = [
   "Identity check: the system found you, but not as a person.",
-  "Required selection: useful / grateful / invisible / integrated",
+  "Classification required: economic / compliant / invisible / integrated",
   "Field check: your name must fit the field.",
   "Evidence check: memory is not accepted as evidence.",
   "Silence check: no objection has been processed.",
@@ -214,14 +214,14 @@ const evidenceCaptionSets = [
     "language note detached",
     "unofficial memory",
     "labor trace unconfirmed",
-    "gratitude not proven"
+    "integration evidence insufficient"
   ],
   [
     "format rejected",
     "scan cropped",
     "attachment expired",
     "witness not processed",
-    "proof too human",
+    "format outside policy",
     "document unavailable"
   ],
   [
@@ -243,7 +243,7 @@ const evidenceCaptionSets = [
 ];
 
 const exhibitionMessages = [
-  "Automated review opened another requirement.",
+  "Automatic review opened another requirement.",
   "Almost complete is the decision.",
   "Supporting evidence reclassified.",
   "Completed status reopened.",
@@ -303,9 +303,15 @@ let progressTarget = 96.4;
 let voiceIndex = 0;
 let requirementCount = 0;
 let resetCount = 0;
+let birthReviewStep = -1;
+let addressReviewStep = -1;
 
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
+}
+
+function pressurePick(list, offset = 0) {
+  return list[(attempts + requirementCount + offset) % list.length];
 }
 
 function clamp(value, min, max) {
@@ -325,7 +331,7 @@ function updateProgress() {
 
   if (shouldFallBack) {
     progress -= 0.25 + Math.random() * (0.85 + attempts * 0.08);
-    progressTarget = 93.5 + Math.random() * 3.1;
+    progressTarget = 93.2 + Math.random() * 2.8;
   } else {
     progress += (progressTarget - progress) * 0.045 + Math.random() * 0.05;
   }
@@ -387,7 +393,7 @@ function stageIndex() {
 function updateReasonConstraint() {
   const limit = Number(reasonForStaying.maxLength);
   const remaining = Math.max(0, limit - reasonForStaying.value.length);
-  reasonConstraint.textContent = `field limit: ${limit} characters / remaining: ${remaining}`;
+  reasonConstraint.textContent = `field limit: ${limit} / remaining: ${remaining}`;
 }
 
 function renderPressureState() {
@@ -423,7 +429,7 @@ function renderScene() {
   const translation = translationScenes[attempts % translationScenes.length];
   const question = inspectionQuestions[(attempts + Math.max(mapIndex, 0)) % inspectionQuestions.length];
 
-  applicantRole.textContent = `${role} / person not accepted.`;
+  applicantRole.textContent = `${role} / recognition withheld.`;
   actTitle.textContent = act[0];
   actDescription.textContent = act[1];
   voiceSpeaker.textContent = voice[0];
@@ -445,7 +451,7 @@ function nudge(message) {
     formStatus.textContent = message;
     addLog(message);
   } else {
-    addLog(pick(institutionalLogs[stageIndex()]));
+    addLog(pressurePick(institutionalLogs[stageIndex()]));
   }
 }
 
@@ -468,13 +474,13 @@ function showSuggestions(input) {
       list.hidden = true;
 
       if (input === birthPlace) {
-        birthPlaceMessage.textContent = "Origin accepted only as suspicion.";
+        birthPlaceMessage.textContent = "Origin recorded as liability.";
         requirementCount += 1;
-        nudge("Previous country archived. Current life discounted.");
+        nudge("Previous jurisdiction archived. Current record reduced.");
       } else {
-        currentAddressMessage.textContent = "Address accepted. Person still pending.";
+        currentAddressMessage.textContent = "Address accepted. Status withheld.";
         requirementCount += 1;
-        nudge("Address accepted. Person still pending.");
+        nudge("Address accepted. Status withheld.");
       }
     });
     item.append(button);
@@ -489,7 +495,7 @@ function hideSuggestions(input) {
 }
 
 function questionBirthplace() {
-  const message = pick(rejectionMessages);
+  const message = pressurePick(rejectionMessages);
   birthPlaceMessage.textContent = message;
   birthPlace.classList.remove("field-questioned");
   void birthPlace.offsetWidth;
@@ -498,7 +504,7 @@ function questionBirthplace() {
 }
 
 function questionAddress() {
-  const message = pick(addressMessages);
+  const message = pressurePick(addressMessages, 1);
   currentAddressMessage.textContent = message;
   nudge(message);
 }
@@ -507,6 +513,8 @@ function resetExperience() {
   form.reset();
   resetCount += 1;
   requirementCount += 1;
+  birthReviewStep = -1;
+  addressReviewStep = -1;
   attempts = Math.max(attempts + 1, 1);
   progress = clamp(progress - 1.1, 84.2, 96.9);
   progressTarget = Math.min(progressTarget, 94.8);
@@ -514,7 +522,7 @@ function resetExperience() {
   loadingPhrase.textContent = "Application remains open.";
   protocolStatus.textContent = `POST /case/restart -> 202 PENDING / restart ${resetCount}`;
   formStatus.textContent = "Start again. The condition remains.";
-  birthPlaceMessage.textContent = "origin cleared; suspicion retained";
+  birthPlaceMessage.textContent = "origin cleared; review retained";
   currentAddressMessage.textContent = "address cleared; status unchanged";
   hideSuggestions(birthPlace);
   hideSuggestions(currentAddress);
@@ -522,7 +530,7 @@ function resetExperience() {
   renderPressureState();
   renderProgress();
   updateMap();
-  addLog("Start again. The condition remains.");
+  addLog("Start again. Pending condition retained.");
   addLog("Case HOME-00097 remains open.");
 }
 
@@ -531,14 +539,18 @@ currentAddress.addEventListener("focus", () => showSuggestions(currentAddress));
 
 birthPlace.addEventListener("input", () => {
   showSuggestions(birthPlace);
-  if (birthPlace.value.trim().length > 2) {
+  const reviewStep = Math.floor(birthPlace.value.trim().length / 6);
+  if (birthPlace.value.trim().length > 2 && reviewStep > birthReviewStep) {
+    birthReviewStep = reviewStep;
     questionBirthplace();
   }
 });
 
 currentAddress.addEventListener("input", () => {
   showSuggestions(currentAddress);
-  if (currentAddress.value.trim().length > 3) {
+  const reviewStep = Math.floor(currentAddress.value.trim().length / 7);
+  if (currentAddress.value.trim().length > 3 && reviewStep > addressReviewStep) {
+    addressReviewStep = reviewStep;
     questionAddress();
   }
 });
@@ -559,7 +571,7 @@ form.addEventListener("submit", (event) => {
   const status = submitStates[Math.min(level + 1, submitStates.length - 1)];
   protocolStatus.textContent = `POST /case/HOME-00097 -> 202 PENDING / requirement ${requirementCount}`;
   nudge(status);
-  addLog(pick(institutionalLogs[stageIndex()]));
+  addLog(pressurePick(institutionalLogs[stageIndex()], 1));
 });
 
 resetButton.addEventListener("click", resetExperience);
@@ -577,7 +589,7 @@ deadLinks.forEach((link) => {
 function runExhibitionStep() {
   requirementCount += 1;
   protocolStatus.textContent = `AUTO /case-review -> 202 PENDING / requirement ${requirementCount}`;
-  nudge(pick(exhibitionMessages));
+  nudge(exhibitionMessages[(requirementCount - 1) % exhibitionMessages.length]);
   updateMap();
   if (Math.random() < 0.5) {
     updatePhrase();
@@ -589,18 +601,18 @@ renderScene();
 renderPressureState();
 updateMap();
 
-window.setInterval(updateProgress, reducedMotion ? 5200 : 1400);
-window.setInterval(updatePhrase, reducedMotion ? 7200 : 4300);
-window.setInterval(updateMap, reducedMotion ? 8200 : 5200);
-window.setInterval(shiftLanguage, reducedMotion ? 9800 : 7200);
+window.setInterval(updateProgress, reducedMotion ? 6500 : 1800);
+window.setInterval(updatePhrase, reducedMotion ? 11000 : 6200);
+window.setInterval(updateMap, reducedMotion ? 12000 : 7800);
+window.setInterval(shiftLanguage, reducedMotion ? 14000 : 11000);
 
 if (exhibitionMode) {
-  addLog("Automatic review active. No completion available.");
+  addLog("Automatic review active. Completion unavailable.");
   protocolStatus.textContent = "AUTO /exhibition-mode -> 202 PENDING";
 
   if (reducedMotion) {
     addLog("Automatic review paused. Pending condition retained.");
   } else {
-    window.setInterval(runExhibitionStep, 6800);
+    window.setInterval(runExhibitionStep, 14000);
   }
 }

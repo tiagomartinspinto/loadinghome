@@ -24,6 +24,8 @@
 - Sharpened user-facing language so the administrative voice is colder, more direct, and clearer about labor, residence, evidence, and non-belonging.
 - Replaced softer status, review, translation, evidence, and reset language with more direct administrative refusals while keeping the interface restrained.
 - Shifted the visual palette toward cold system whites/grays with sparse semantic red, green, and blue for refusal, temporary validity, and protocol residue.
+- Tightened the most recent pass for museum/kiosk presentation with larger base text, more deliberate spacing, slower exhibition-mode pacing, less slogan-like copy, and formal evidence record numbering.
+- Made pressure progression less twitchy by reviewing typed fields in deliberate steps rather than reacting to every character.
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
 - Added a GitHub Pages deployment workflow for building and publishing `dist`.
@@ -49,6 +51,7 @@
 - Checked exhibition mode in preview for automatic pending-review updates and no completion.
 - Checked raw static serving with the JavaScript stylesheet fallback after removing the direct stylesheet link.
 - Confirmed no external APIs, analytics, uploads, cookies, or `localStorage` were introduced.
+- Added README installation guidance for fullscreen browser or kiosk presentation.
 - Scanned public-facing files for references to the named assistant/tooling terms, specific countries, and specific cities; no matches were found.
 - Scanned for personal identifiers; the only match is the GitHub Pages URL required in `README.md`.
 
