@@ -23,12 +23,6 @@
   --line: #3a3a3a;
   --soft-line: #1f1f1f;
   --accent: #ffffff;
-  --red: #ff3b30;
-  --red-bg: #160000;
-  --green: #34c759;
-  --green-bg: #001a0a;
-  --blue: #0a84ff;
-  --blue-bg: #001326;
   --pressure: 0;
   color-scheme: dark;
   font-family: "Lekton", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -211,23 +205,6 @@ h2 {
   font-size: 0.84rem;
 }
 
-#customerRecord,
-#decisionStatus,
-#attachmentStatus,
-#belongingStatus,
-#personStatus {
-  color: var(--red);
-}
-
-#processingPhase {
-  color: var(--blue);
-}
-
-#laborStatus,
-#addressStatus {
-  color: var(--green);
-}
-
 .loading-copy p {
   margin-bottom: 0.4rem;
 }
@@ -239,7 +216,7 @@ h2 {
 }
 
 .small-note {
-  color: var(--red);
+  color: var(--muted);
   font-size: 0.78rem;
 }
 
@@ -254,7 +231,7 @@ h2 {
 
 #progressOutput,
 #titlePercent {
-  color: var(--green);
+  color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 
@@ -272,7 +249,7 @@ h2 {
   inset: 0 auto 0 0;
   width: 91.4%;
   border-right: 1px solid var(--ink);
-  background: var(--green);
+  background: var(--ink);
   transition: width 1300ms ease;
 }
 
@@ -289,12 +266,12 @@ h2 {
   gap: 0.35rem 1rem;
   border-bottom: 1px solid var(--line);
   padding: 0.64rem 0;
-  color: var(--blue);
+  color: var(--muted);
   font-size: 0.72rem;
 }
 
 .protocol-row a {
-  color: var(--blue);
+  color: var(--muted);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
@@ -357,12 +334,12 @@ h2 {
 }
 
 #formStatus {
-  color: var(--red);
+  color: var(--ink);
 }
 
 .system-note {
   margin-top: 0.45rem;
-  color: var(--red);
+  color: var(--muted);
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -399,7 +376,7 @@ h2 {
   min-height: 86px;
   place-items: center;
   padding: 0.65rem;
-  background: #050505;
+  background: var(--surface);
   color: var(--quiet);
   font-size: 0.68rem;
   text-align: center;
@@ -410,16 +387,16 @@ h2 {
 }
 
 .is-blur {
-  background: #0d0d0d;
+  background: var(--soft-line);
 }
 
 .is-archived {
-  background: var(--blue-bg);
-  color: var(--blue);
+  background: var(--soft-line);
+  color: var(--muted);
 }
 
 .is-cropped {
-  background: #050505;
+  background: var(--surface);
 }
 
 .is-cropped::before {
@@ -433,8 +410,8 @@ h2 {
 }
 
 .is-missing {
-  background: var(--red-bg);
-  color: var(--red);
+  background: var(--surface);
+  color: var(--muted);
 }
 
 .is-missing::before,
@@ -444,7 +421,7 @@ h2 {
   top: 50%;
   width: 64%;
   height: 1px;
-  background: var(--red);
+  background: var(--quiet);
   content: "";
   opacity: 0.65;
 }
@@ -475,15 +452,6 @@ h2 {
   font-size: 0.7rem;
 }
 
-.archive-item:has(.is-missing) figcaption,
-.archive-item:has(.is-cropped) figcaption {
-  color: var(--red);
-}
-
-.archive-item:has(.is-archived) figcaption {
-  color: var(--blue);
-}
-
 .verification-table {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -511,15 +479,15 @@ h2 {
 }
 
 .state-valid {
-  color: var(--green);
+  color: var(--muted);
 }
 
 .state-rejected {
-  color: var(--red);
+  color: var(--muted);
 }
 
 .state-protocol {
-  color: var(--blue);
+  color: var(--muted);
 }
 
 .inspection-box {
@@ -540,7 +508,7 @@ h2 {
 
 .inspection-box p:last-child {
   margin-bottom: 0;
-  color: var(--red);
+  color: var(--muted);
 }
 
 .form-panel {
@@ -579,7 +547,7 @@ textarea {
   padding: 0.62rem 0.68rem;
   background: var(--surface);
   color: var(--ink);
-  caret-color: var(--blue);
+  caret-color: var(--ink);
 }
 
 textarea {
@@ -592,15 +560,15 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: var(--blue);
-  outline: 1px solid var(--blue);
+  border-color: var(--ink);
+  outline: 1px solid var(--ink);
   outline-offset: -1px;
 }
 
 .field-message {
   min-height: 1.05rem;
   margin: 0.3rem 0 0;
-  color: var(--red);
+  color: var(--muted);
   font-size: 0.74rem;
 }
 
@@ -636,7 +604,7 @@ textarea:focus {
 .suggestions button:hover,
 .suggestions button:focus-visible {
   outline: 0;
-  background: var(--blue-bg);
+  background: var(--soft-line);
 }
 
 .form-actions {
@@ -663,8 +631,8 @@ textarea:focus {
 
 .primary-button:hover,
 .primary-button:focus-visible {
-  border-color: var(--red);
-  background: var(--red);
+  border-color: var(--ink);
+  background: var(--ink);
   color: var(--paper);
 }
 
@@ -672,7 +640,7 @@ textarea:focus {
   border: 0;
   padding: 0.45rem 0;
   background: transparent;
-  color: var(--blue);
+  color: var(--muted);
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
@@ -711,7 +679,7 @@ textarea:focus {
   height: 14px;
   margin: 0;
   padding: 0;
-  accent-color: var(--green);
+  accent-color: var(--ink);
 }
 
 .event-log {
@@ -725,9 +693,9 @@ textarea:focus {
 .event-log li {
   border-bottom: 1px solid var(--line);
   padding: 0.58rem 0;
-  border-left: 2px solid var(--red);
+  border-left: 2px solid var(--ink);
   padding-left: 0.55rem;
-  color: var(--red);
+  color: var(--muted);
   font-size: 0.8rem;
 }
 
@@ -741,7 +709,7 @@ textarea:focus {
 
 @keyframes termChange {
   50% {
-    color: var(--blue);
+    color: var(--ink);
     opacity: 0.68;
   }
 }
