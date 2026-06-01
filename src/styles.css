@@ -49,7 +49,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.48;
 }
 
@@ -96,7 +96,7 @@ a:focus-visible {
 
 .page-shell {
   width: calc(100% - 40px);
-  max-width: 1080px;
+  max-width: 1160px;
   margin-right: auto;
   margin-left: auto;
   padding: 40px 0 72px;
@@ -186,7 +186,7 @@ h2 {
 
 .status-table {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   margin: 0;
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
@@ -214,7 +214,8 @@ h2 {
 #customerRecord,
 #decisionStatus,
 #attachmentStatus,
-#belongingStatus {
+#belongingStatus,
+#personStatus {
   color: var(--red);
 }
 
@@ -222,7 +223,8 @@ h2 {
   color: var(--blue);
 }
 
-#laborStatus {
+#laborStatus,
+#addressStatus {
   color: var(--green);
 }
 
@@ -482,113 +484,42 @@ h2 {
   color: var(--blue);
 }
 
-.map-stage {
-  position: relative;
-  min-height: 260px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--surface);
-}
-
-.map-stage::before {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H48M0 0V48' fill='none' stroke='%231f1f1f' stroke-width='1'/%3E%3C/svg%3E");
-  content: "";
-}
-
-.route {
-  position: absolute;
-  inset: 15% 8% 17%;
-  width: 84%;
-  height: 68%;
-  overflow: visible;
-}
-
-.route path {
-  fill: none;
-  stroke: var(--blue);
-  stroke-dasharray: 3 8;
-  stroke-width: 1.1;
-  opacity: 0.7;
-  animation: routeDrift 9s linear infinite;
-}
-
-.map-dot {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 9px;
-  height: 9px;
-  border: 1px solid var(--blue);
-  background: var(--blue);
-  transform: translate(54%, 62%);
-  transition: transform 1400ms ease;
-}
-
-.map-label {
-  position: absolute;
-  border: 1px solid var(--line);
-  padding: 0.18rem 0.34rem;
-  background: var(--surface);
-  color: var(--blue);
-  font-size: 0.74rem;
-}
-
-.label-a {
-  left: 12%;
-  top: 62%;
-}
-
-.label-b {
-  right: 18%;
-  top: 23%;
-}
-
-.label-c {
-  right: 12%;
-  bottom: 15%;
-  color: var(--red);
-}
-
-.coordinate-list {
+.verification-table {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 10px 0 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 }
 
-.coordinate-list div {
+.verification-table div {
   min-width: 0;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 0.64rem;
+  padding: 0.7rem 0.72rem;
 }
 
-.coordinate-list dt {
+.verification-table dt {
   color: var(--quiet);
   font-size: 0.7rem;
   text-transform: uppercase;
 }
 
-.coordinate-list dd {
-  margin: 0.2rem 0 0;
-  color: var(--ink);
+.verification-table dd {
+  margin: 0.24rem 0 0;
   font-size: 0.82rem;
 }
 
-#mapStatus {
-  color: var(--blue);
-}
-
-#addressRecord {
+.state-valid {
   color: var(--green);
 }
 
-#homeRecord {
+.state-rejected {
   color: var(--red);
+}
+
+.state-protocol {
+  color: var(--blue);
 }
 
 .inspection-box {
@@ -808,12 +739,6 @@ textarea:focus {
   animation: fieldQuestioned 700ms ease;
 }
 
-@keyframes routeDrift {
-  to {
-    stroke-dashoffset: -22;
-  }
-}
-
 @keyframes termChange {
   50% {
     color: var(--blue);
@@ -856,7 +781,7 @@ textarea:focus {
   .field-grid,
   .status-table,
   .case-checks,
-  .coordinate-list {
+  .verification-table {
     grid-template-columns: 1fr;
   }
 

@@ -2,7 +2,7 @@
 
 `Auto da Espera` is a minimalist administrative web artwork about immigration as a permanent state of almost-arrival. The page behaves like a fictional public-service case system: it verifies residence, converts statements into records, reopens requirements, and never completes. `Loading Home: 97%` remains inside the work as a system/status phrase.
 
-The work borrows from residence-permit forms, browser loading states, missing supporting evidence, and incomplete location records. It does not use official branding, real form IDs, or real instructions. Its pressure comes from small refusals, repeated checks, and a decision that refuses to call itself final.
+The work borrows from residence-permit forms, browser loading states, missing supporting evidence, and case-management records. It is a fictional administrative interface, not an official service, and it does not use official branding, real form IDs, or real instructions. Its pressure comes from small refusals, repeated checks, and a decision that refuses to call itself final.
 
 The title can be read as `The Play of Waiting` or `The Morality Play of Waiting`. It loosely echoes the Portuguese theatrical form `auto`, associated with short allegorical and moral plays, while `espera` means waiting.
 
@@ -40,8 +40,8 @@ https://tiagomartinspinto.github.io/loadinghome/
 
 - The progress bar moves between an almost-finished range and never reaches `100%`.
 - Small interface labels slowly shift between several languages.
-- The supporting evidence section uses empty frames and missing-file placeholders instead of real photos.
-- The residence trace is an abstract local panel, not a real map service.
+- The supporting evidence section uses empty record frames and missing-file placeholders instead of real photos.
+- The residence verification area is a fictional status record, not a map or real location service.
 - Birthplace and address fields show fake browser-like suggestions.
 - The form never submits anywhere; each attempt leaves the application open.
 - Internal review notes and review stages shift as the case is repeatedly checked.

@@ -1,13 +1,4 @@
-const viteBase = import.meta.env?.BASE_URL;
-
-if (viteBase) {
-  import("./styles.css");
-} else {
-  const stylesheet = document.createElement("link");
-  stylesheet.rel = "stylesheet";
-  stylesheet.href = import.meta.url.replace(/\/[^/]*$/, "/styles.css");
-  document.head.append(stylesheet);
-}
+import "./styles.css";
 
 const phrases = [
   "Loading home record...",
@@ -19,7 +10,7 @@ const phrases = [
   "Almost complete is the decision.",
   "Address validated. Status unchanged.",
   "Residence entered. Recognition withheld.",
-  "Your life does not fit the file.",
+  "Field content exceeds accepted category.",
   "Application remains open."
 ];
 
@@ -33,14 +24,62 @@ const dictionary = {
   pending: ["Pending", "Pendente", "Odottaa", "En attente"]
 };
 
-const mapStates = [
-  ["Locating...", "Previous address found", "checking records", "Home not confirmed", "translate(54%, 62%)"],
-  ["Origin country?", "Birth record visible", "Departure point archived", "Home not confirmed", "translate(22%, 70%)"],
-  ["Current country?", "Address valid", "Arrival point pending", "Person not confirmed", "translate(68%, 34%)"],
-  ["Previous address found", "Previous address found", "Former home responding", "Home not confirmed", "translate(38%, 50%)"],
-  ["Host city unresolved", "Temporary home", "Administrative region unknown", "presence accepted, status pending", "translate(72%, 58%)"],
-  ["Elsewhere detected", "Unverified location", "Not here", "Not there", "translate(44%, 38%)"],
-  ["Near home", "address near valid", "accepted approximation", "insufficient", "translate(60%, 46%)"]
+const verificationStates = [
+  {
+    status: "Verification result: unresolved",
+    address: "valid",
+    presence: "detected",
+    duration: "insufficient evidence",
+    origin: "retained",
+    belonging: "not confirmed",
+    result: "unresolved",
+    previous: "still active in file",
+    current: "accepted as location, not home"
+  },
+  {
+    status: "Address valid. Status withheld.",
+    address: "valid",
+    presence: "detected",
+    duration: "does not establish status",
+    origin: "retained",
+    belonging: "not accepted",
+    result: "reopened",
+    previous: "higher weight retained",
+    current: "valid for service only"
+  },
+  {
+    status: "Physical presence detected. Person not confirmed.",
+    address: "serviceable",
+    presence: "detected",
+    duration: "under review",
+    origin: "active in record",
+    belonging: "withheld",
+    result: "additional review",
+    previous: "not closed",
+    current: "location accepted"
+  },
+  {
+    status: "Residence duration is not sufficient evidence.",
+    address: "valid",
+    presence: "detected",
+    duration: "insufficient evidence",
+    origin: "retained",
+    belonging: "not accepted",
+    result: "not issued",
+    previous: "retained",
+    current: "home not confirmed"
+  },
+  {
+    status: "Current address accepted as location, not as home.",
+    address: "accepted",
+    presence: "logged",
+    duration: "not decisive",
+    origin: "retained",
+    belonging: "not confirmed",
+    result: "pending",
+    previous: "still active",
+    current: "status withheld"
+  }
 ];
 
 const rejectionMessages = [
@@ -54,10 +93,10 @@ const rejectionMessages = [
 ];
 
 const addressMessages = [
-  "The address is valid. You are not.",
+  "Address valid. Person status withheld.",
   "Current location requires more proof.",
   "Temporary address recorded as permanent liability.",
-  "Host city unresolved.",
+  "Administrative region unresolved.",
   "Residence detected. Home not confirmed."
 ];
 
@@ -73,8 +112,8 @@ const submitStates = [
 const suggestions = [
   "Home, not confirmed",
   "Nearest accepted location",
-  "Previous country, archived",
-  "Current country, pending",
+  "Previous record, archived",
+  "Current record, pending",
   "No longer applicable",
   "Approximation accepted by file",
   "Temporary address with permanent consequences",
@@ -102,12 +141,12 @@ const acts = [
 const officeVoices = [
   ["Internal comment", "The file requires a smaller account."],
   ["Eligibility note", "Almost complete is the decision."],
-  ["Origin check", "Your life does not fit the file."],
+  ["Origin check", "Field content exceeds accepted category."],
   ["Former address archive", "Former address carries higher weight."],
-  ["Witness record", "Your memory is not accepted as evidence."],
+  ["Witness record", "Memory is not accepted as evidence."],
   ["Translation review", "Meaning adjusted to fit the field."],
   ["Document request", "Every answer creates another requirement."],
-  ["Queue status", "You can stay in the process."],
+  ["Queue status", "Residence may remain in process."],
   ["Stamp status", "Approval withheld. Labor retained."],
   ["Boundary rule", "Residence entered. Recognition withheld."],
   ["Pending case group", "Pending cases consolidated."]
@@ -123,9 +162,9 @@ const translationScenes = [
 ];
 
 const inspectionQuestions = [
-  "Identity check: the system found you, but not as a person.",
+  "Identity check: record located, person not confirmed.",
   "Classification required: economic / compliant / invisible / integrated",
-  "Field check: your name must fit the field.",
+  "Field check: name must fit the field.",
   "Evidence check: memory is not accepted as evidence.",
   "Silence check: no objection has been processed.",
   "Routing check: every document request opens another request."
@@ -179,6 +218,8 @@ const caseRegisterStates = [
     attachment: "insufficient",
     labor: "accepted",
     belonging: "not accepted",
+    address: "valid",
+    person: "not confirmed",
     caseStatus: "STATUS: PENDING"
   },
   {
@@ -188,6 +229,8 @@ const caseRegisterStates = [
     attachment: "format check",
     labor: "accepted",
     belonging: "not accepted",
+    address: "valid",
+    person: "not confirmed",
     caseStatus: "STATUS: INCOMPLETE"
   },
   {
@@ -197,6 +240,8 @@ const caseRegisterStates = [
     attachment: "insufficient",
     labor: "accepted",
     belonging: "not accepted",
+    address: "valid",
+    person: "not confirmed",
     caseStatus: "STATUS: REOPENED"
   },
   {
@@ -206,6 +251,8 @@ const caseRegisterStates = [
     attachment: "reclassified",
     labor: "accepted",
     belonging: "not accepted",
+    address: "valid",
+    person: "not confirmed",
     caseStatus: "STATUS: REOPENED"
   },
   {
@@ -215,6 +262,8 @@ const caseRegisterStates = [
     attachment: "insufficient",
     labor: "accepted",
     belonging: "not accepted",
+    address: "valid",
+    person: "not confirmed",
     caseStatus: "STATUS: REOPENED"
   }
 ];
@@ -261,7 +310,7 @@ const evidenceCaptionSets = [
     "current file incomplete",
     "language note detached",
     "unofficial memory",
-    "labor trace unconfirmed",
+    "labor record unconfirmed",
     "integration evidence insufficient"
   ],
   [
@@ -304,11 +353,15 @@ const progressFill = document.querySelector("#progressFill");
 const progressOutput = document.querySelector("#progressOutput");
 const progressBar = document.querySelector("#homeProgress");
 const loadingPhrase = document.querySelector("#loadingPhrase");
-const mapStatus = document.querySelector("#mapStatus");
+const verificationStatus = document.querySelector("#verificationStatus");
 const addressRecord = document.querySelector("#addressRecord");
+const physicalPresence = document.querySelector("#physicalPresence");
+const residenceDuration = document.querySelector("#residenceDuration");
 const originRecord = document.querySelector("#originRecord");
-const homeRecord = document.querySelector("#homeRecord");
-const mapDot = document.querySelector("#mapDot");
+const belongingRecord = document.querySelector("#belongingRecord");
+const verificationResult = document.querySelector("#verificationResult");
+const previousAddress = document.querySelector("#previousAddress");
+const currentAddressHome = document.querySelector("#currentAddressHome");
 const form = document.querySelector("#residenceForm");
 const formStatus = document.querySelector("#formStatus");
 const requirementRecord = document.querySelector("#requirementRecord");
@@ -329,6 +382,8 @@ const decisionStatus = document.querySelector("#decisionStatus");
 const attachmentStatus = document.querySelector("#attachmentStatus");
 const laborStatus = document.querySelector("#laborStatus");
 const belongingStatus = document.querySelector("#belongingStatus");
+const addressStatus = document.querySelector("#addressStatus");
+const personStatus = document.querySelector("#personStatus");
 const deadLinks = Array.from(document.querySelectorAll("[data-dead-link]"));
 const termNodes = Array.from(document.querySelectorAll("[data-term]"));
 const fieldLabels = {
@@ -352,7 +407,7 @@ const exhibitionMode = params.get("mode") === "exhibition";
 
 let progress = 91.4;
 let phraseIndex = 0;
-let mapIndex = -1;
+let verificationIndex = -1;
 let attempts = 0;
 let progressTarget = 96.4;
 let voiceIndex = 0;
@@ -403,15 +458,19 @@ function updatePhrase() {
   renderScene();
 }
 
-function updateMap() {
-  mapIndex = (mapIndex + 1) % mapStates.length;
-  const [status, address, origin, result, dotPosition] = mapStates[mapIndex];
+function updateVerification() {
+  verificationIndex = (verificationIndex + 1) % verificationStates.length;
+  const state = verificationStates[verificationIndex];
 
-  mapStatus.textContent = status;
-  addressRecord.textContent = address;
-  originRecord.textContent = origin;
-  homeRecord.textContent = result;
-  mapDot.style.transform = dotPosition;
+  verificationStatus.textContent = state.status;
+  addressRecord.textContent = state.address;
+  physicalPresence.textContent = state.presence;
+  residenceDuration.textContent = state.duration;
+  originRecord.textContent = state.origin;
+  belongingRecord.textContent = state.belonging;
+  verificationResult.textContent = state.result;
+  previousAddress.textContent = state.previous;
+  currentAddressHome.textContent = state.current;
 }
 
 function shiftLanguage() {
@@ -469,6 +528,8 @@ function renderPressureState() {
   attachmentStatus.textContent = caseState.attachment;
   laborStatus.textContent = caseState.labor;
   belongingStatus.textContent = caseState.belonging;
+  addressStatus.textContent = caseState.address;
+  personStatus.textContent = caseState.person;
 
   reasonForStaying.maxLength = reasonLimits[level];
   if (reasonForStaying.value.length > reasonForStaying.maxLength) {
@@ -490,7 +551,7 @@ function renderScene() {
   const role = applicantRoles[attempts % applicantRoles.length];
   const voice = officeVoices[(voiceIndex + attempts) % officeVoices.length];
   const translation = translationScenes[attempts % translationScenes.length];
-  const question = inspectionQuestions[(attempts + Math.max(mapIndex, 0)) % inspectionQuestions.length];
+  const question = inspectionQuestions[(attempts + Math.max(verificationIndex, 0)) % inspectionQuestions.length];
 
   applicantRole.textContent = `${role} / recognition withheld.`;
   actTitle.textContent = act[0];
@@ -592,7 +653,7 @@ function resetExperience() {
   renderScene();
   renderPressureState();
   renderProgress();
-  updateMap();
+  updateVerification();
   addLog("Start again. Pending condition retained.");
   addLog("Case HOME-00097 remains open.");
 }
@@ -653,7 +714,7 @@ function runExhibitionStep() {
   requirementCount += 1;
   protocolStatus.textContent = `AUTO /case-review -> 202 PENDING / requirement ${requirementCount}`;
   nudge(exhibitionMessages[(requirementCount - 1) % exhibitionMessages.length]);
-  updateMap();
+  updateVerification();
   if (Math.random() < 0.5) {
     updatePhrase();
   }
@@ -662,11 +723,11 @@ function runExhibitionStep() {
 renderProgress();
 renderScene();
 renderPressureState();
-updateMap();
+updateVerification();
 
 window.setInterval(updateProgress, reducedMotion ? 6500 : 1800);
 window.setInterval(updatePhrase, reducedMotion ? 11000 : 6200);
-window.setInterval(updateMap, reducedMotion ? 12000 : 7800);
+window.setInterval(updateVerification, reducedMotion ? 12000 : 9000);
 window.setInterval(shiftLanguage, reducedMotion ? 14000 : 11000);
 
 if (exhibitionMode) {
