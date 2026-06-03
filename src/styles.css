@@ -180,7 +180,7 @@ h2 {
 
 .status-table {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);

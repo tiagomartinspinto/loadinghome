@@ -30,55 +30,40 @@ const verificationStates = [
     address: "valid",
     presence: "detected",
     duration: "insufficient evidence",
-    origin: "retained",
-    belonging: "not confirmed",
     result: "unresolved",
-    previous: "still active in file",
-    current: "accepted as location, not home"
+    previous: "still active in file"
   },
   {
     status: "Address valid. Status withheld.",
     address: "valid",
     presence: "detected",
     duration: "does not establish status",
-    origin: "retained",
-    belonging: "not accepted",
     result: "reopened",
-    previous: "higher weight retained",
-    current: "valid for service only"
+    previous: "higher weight retained"
   },
   {
     status: "Physical presence detected. Person not confirmed.",
     address: "serviceable",
     presence: "detected",
     duration: "under review",
-    origin: "active in record",
-    belonging: "withheld",
     result: "additional review",
-    previous: "not closed",
-    current: "location accepted"
+    previous: "not closed"
   },
   {
     status: "Residence duration is not sufficient evidence.",
     address: "valid",
     presence: "detected",
     duration: "insufficient evidence",
-    origin: "retained",
-    belonging: "not accepted",
     result: "not issued",
-    previous: "retained",
-    current: "home not confirmed"
+    previous: "retained"
   },
   {
-    status: "Current address accepted as location, not as home.",
+    status: "Address accepted as location, not as home.",
     address: "accepted",
     presence: "logged",
     duration: "not decisive",
-    origin: "retained",
-    belonging: "not confirmed",
     result: "pending",
-    previous: "still active",
-    current: "status withheld"
+    previous: "still active"
   }
 ];
 
@@ -213,57 +198,37 @@ const reasonLimits = [260, 220, 180, 140, 96];
 const caseRegisterStates = [
   {
     customer: "PERSON PENDING",
-    phase: "additional review",
     decision: "not issued",
-    attachment: "insufficient",
     labor: "accepted",
     belonging: "not accepted",
-    address: "valid",
-    person: "not confirmed",
     caseStatus: "STATUS: PENDING"
   },
   {
     customer: "PERSON REDUCED",
-    phase: "language review",
     decision: "not issued",
-    attachment: "format check",
     labor: "accepted",
     belonging: "not accepted",
-    address: "valid",
-    person: "not confirmed",
     caseStatus: "STATUS: INCOMPLETE"
   },
   {
     customer: "PERSON UNCONFIRMED",
-    phase: "evidence review",
     decision: "withheld",
-    attachment: "insufficient",
     labor: "accepted",
     belonging: "not accepted",
-    address: "valid",
-    person: "not confirmed",
     caseStatus: "STATUS: REOPENED"
   },
   {
     customer: "PERSON CONDITIONAL",
-    phase: "usefulness review",
     decision: "not issued",
-    attachment: "reclassified",
     labor: "accepted",
     belonging: "not accepted",
-    address: "valid",
-    person: "not confirmed",
     caseStatus: "STATUS: REOPENED"
   },
   {
     customer: "PERSON PENDING",
-    phase: "indefinite review",
     decision: "not issued",
-    attachment: "insufficient",
     labor: "accepted",
     belonging: "not accepted",
-    address: "valid",
-    person: "not confirmed",
     caseStatus: "STATUS: REOPENED"
   }
 ];
@@ -357,11 +322,8 @@ const verificationStatus = document.querySelector("#verificationStatus");
 const addressRecord = document.querySelector("#addressRecord");
 const physicalPresence = document.querySelector("#physicalPresence");
 const residenceDuration = document.querySelector("#residenceDuration");
-const originRecord = document.querySelector("#originRecord");
-const belongingRecord = document.querySelector("#belongingRecord");
 const verificationResult = document.querySelector("#verificationResult");
 const previousAddress = document.querySelector("#previousAddress");
-const currentAddressHome = document.querySelector("#currentAddressHome");
 const form = document.querySelector("#residenceForm");
 const formStatus = document.querySelector("#formStatus");
 const requirementRecord = document.querySelector("#requirementRecord");
@@ -377,13 +339,9 @@ const reasonForStaying = document.querySelector("#reasonForStaying");
 const reasonConstraint = document.querySelector("#reasonConstraint");
 const protocolStatus = document.querySelector("#protocolStatus");
 const customerRecord = document.querySelector("#customerRecord");
-const processingPhase = document.querySelector("#processingPhase");
 const decisionStatus = document.querySelector("#decisionStatus");
-const attachmentStatus = document.querySelector("#attachmentStatus");
 const laborStatus = document.querySelector("#laborStatus");
 const belongingStatus = document.querySelector("#belongingStatus");
-const addressStatus = document.querySelector("#addressStatus");
-const personStatus = document.querySelector("#personStatus");
 const deadLinks = Array.from(document.querySelectorAll("[data-dead-link]"));
 const termNodes = Array.from(document.querySelectorAll("[data-term]"));
 const fieldLabels = {
@@ -466,11 +424,8 @@ function updateVerification() {
   addressRecord.textContent = state.address;
   physicalPresence.textContent = state.presence;
   residenceDuration.textContent = state.duration;
-  originRecord.textContent = state.origin;
-  belongingRecord.textContent = state.belonging;
   verificationResult.textContent = state.result;
   previousAddress.textContent = state.previous;
-  currentAddressHome.textContent = state.current;
 }
 
 function shiftLanguage() {
@@ -523,13 +478,9 @@ function renderPressureState() {
   fieldLabels.reason.textContent = labels.reason;
   caseCode.textContent = caseState.caseStatus;
   customerRecord.textContent = caseState.customer;
-  processingPhase.textContent = caseState.phase;
   decisionStatus.textContent = caseState.decision;
-  attachmentStatus.textContent = caseState.attachment;
   laborStatus.textContent = caseState.labor;
   belongingStatus.textContent = caseState.belonging;
-  addressStatus.textContent = caseState.address;
-  personStatus.textContent = caseState.person;
 
   reasonForStaying.maxLength = reasonLimits[level];
   if (reasonForStaying.value.length > reasonForStaying.maxLength) {
