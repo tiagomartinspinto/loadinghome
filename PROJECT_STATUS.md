@@ -32,6 +32,7 @@
 - Removed the visual route/moving-dot metaphor and replaced it with official-looking verification fields.
 - Switched the artwork to a strict black-and-white system palette with grayscale hierarchy only.
 - Removed the remaining color-coded progress, protocol, link, status, evidence, focus, and warning states.
+- Restored the compact museum-form layout proportions after the monochrome pass: 1080px page width, 15px base type, and a four-column application record.
 - Self-hosted Lekton locally under `src/assets/fonts/lekton` for offline-friendly museum/kiosk presentation.
 - Added responsive layout and reduced-motion support.
 - Added Vite GitHub Pages base-path configuration for `/loadinghome/`.
@@ -55,6 +56,7 @@
 - Confirmed the built preview HTML contains the residence verification record and no visual route diagram.
 - Checked normal mode in the browser for the case record, residence verification record, monochrome progress/protocol/link styles, and no console errors.
 - Checked `?mode=exhibition` in the browser for automatic-review activation and no console errors.
+- Checked the compact monochrome layout in the browser for 1080px page width, 15px base type, four application-record columns, no horizontal overflow, normal mode, exhibition mode, and no console errors.
 - Ran a local interaction smoke harness for progress behavior, phrase/verification rotation, language switching, birthplace and address uncertainty, autocomplete fills, impossible submit states, reset behavior, and the fixed `97%` status phrase.
 - Checked the running `/loadinghome/` preview in the browser for document title, quiet `Auto da Espera` heading, case header, supporting evidence, residence verification, form presence, language/verification/progress changes, no console errors, and no horizontal overflow.
 - Confirmed `Loading Home: 97%` appears as a system/status phrase, not the main heading.

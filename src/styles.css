@@ -43,7 +43,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.48;
 }
 
@@ -90,7 +90,7 @@ a:focus-visible {
 
 .page-shell {
   width: calc(100% - 40px);
-  max-width: 980px;
+  max-width: 1080px;
   margin-right: auto;
   margin-left: auto;
   padding: 40px 0 72px;
@@ -168,19 +168,19 @@ h2 {
 }
 
 .case-register {
-  margin-bottom: 22px;
+  margin-bottom: 26px;
   border-top: 1px solid var(--line);
-  padding-top: 14px;
+  padding-top: 16px;
 }
 
 .case-register h2 {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: var(--ink);
 }
 
 .status-table {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0;
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
@@ -190,7 +190,7 @@ h2 {
   min-width: 0;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 0.54rem 0.62rem;
+  padding: 0.62rem 0.66rem;
 }
 
 .status-table dt {
