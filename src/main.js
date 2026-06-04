@@ -15,13 +15,23 @@ const phrases = [
 ];
 
 const dictionary = {
-  home: ["Home", "Casa", "Koti", "Maison"],
-  name: ["Name", "Nome", "Nimi", "Nom"],
-  address: ["Address", "Morada", "Osoite", "Adresse"],
-  loading: ["Loading", "A carregar", "Ladataan", "Chargement"],
-  continue: ["Continue", "Continuar", "Jatka", "Continuer"],
-  reason: ["Reason", "Razao", "Syy", "Raison"],
-  pending: ["Pending", "Pendente", "Odottaa", "En attente"]
+  home: ["Home", "Casa", "Koti", "Dom", "Kodu", "Bayt", "Dim", "Guri", "Khane"],
+  name: ["Name", "Nome", "Nimi", "Imya", "Nimi", "Ism", "Imya", "Magac", "Nam"],
+  address: ["Address", "Morada", "Osoite", "Adres", "Aadress", "Unwan", "Adresa", "Cinwaan", "Adres"],
+  loading: [
+    "Loading",
+    "A carregar",
+    "Ladataan",
+    "Zagruzka",
+    "Laadimine",
+    "Tahmil",
+    "Zavantazhennia",
+    "Soo rarid",
+    "Dar hale bargozari"
+  ],
+  continue: ["Continue", "Continuar", "Jatka", "Prodolzhit", "Jatka", "Istamir", "Prodovzhyty", "Sii wad", "Edame bedeh"],
+  reason: ["Reason", "Razao", "Syy", "Prichina", "Pohjus", "Sabab", "Prychyna", "Sabab", "Dalil"],
+  pending: ["Pending", "Pendente", "Odottaa", "V ozhidanii", "Ootel", "Qayd al-intizar", "Ochikuie", "Sugaya", "Dar entezar"]
 };
 
 const verificationStates = [
