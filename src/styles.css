@@ -123,10 +123,10 @@ p {
 
 h1 {
   max-width: none;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.58rem;
   color: var(--ink);
-  font-size: 1.68rem;
-  line-height: 1.08;
+  font-size: 1.88rem;
+  line-height: 1.02;
   font-weight: 700;
 }
 
@@ -165,14 +165,14 @@ h2 {
   margin-bottom: 34px;
   border-top: 2px solid var(--ink);
   border-bottom: 2px solid var(--ink);
-  padding: 24px 0 26px;
+  padding: 28px 0 30px;
 }
 
 .case-register {
   margin-bottom: 24px;
   border-top: 2px solid var(--ink);
   border-bottom: 1px solid var(--line);
-  padding: 18px 0 20px;
+  padding: 20px 0 22px;
 }
 
 .case-register h2 {
@@ -194,7 +194,7 @@ h2 {
   gap: 1rem;
   min-width: 0;
   border-bottom: 1px solid var(--line);
-  padding: 0.74rem 0;
+  padding: 0.86rem 0;
 }
 
 .status-table dt {
@@ -348,14 +348,15 @@ h2 {
 }
 
 .grounds-selector button {
-  min-height: 38px;
+  min-height: 42px;
   border: 0;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 0.52rem 0.62rem;
+  padding: 0.62rem 0.7rem;
   background: var(--surface);
   color: var(--muted);
   font-size: 0.72rem;
+  font-weight: 700;
   text-align: left;
   text-transform: uppercase;
 }
@@ -801,11 +802,10 @@ textarea:focus {
 
 .event-log li {
   border-bottom: 1px solid var(--line);
-  padding: 0.42rem 0;
+  padding: 0.34rem 0 0.34rem 0.55rem;
   border-left: 2px solid var(--ink);
-  padding-left: 0.55rem;
   color: var(--quiet);
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
 }
 
@@ -873,7 +873,7 @@ textarea:focus {
   }
 
   h1 {
-    font-size: 1.36rem;
+    font-size: 1.52rem;
   }
 }
 

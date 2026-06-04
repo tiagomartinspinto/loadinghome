@@ -7,7 +7,7 @@ const phrases = [
   "Checking belonging: not confirmed.",
   "Home requires confirmation.",
   "Ground accepted as category.",
-  "Almost complete is the decision.",
+  "Almost complete. Decision not issued.",
   "Address validated. Status unchanged.",
   "Residence entered. Recognition withheld.",
   "You have arrived. The case has not.",
@@ -196,7 +196,7 @@ const acts = [
 
 const officeVoices = [
   ["Internal comment", "Statement shortened. Person unresolved."],
-  ["Eligibility note", "Almost complete is the decision."],
+  ["Eligibility note", "Almost complete. Decision not issued."],
   ["Origin check", "Field content exceeds accepted category."],
   ["Former address archive", "Former address carries higher weight."],
   ["Witness record", "Memory is not accepted as evidence."],
@@ -211,7 +211,7 @@ const officeVoices = [
 const translationScenes = [
   ["Statement: I live here", "Recorded as: address valid, person not confirmed."],
   ["Statement: I work here", "Recorded as: labor accepted before presence."],
-  ["Statement: I belong here", "Recorded as: unsupported claim."],
+  ["Statement: I belong here", "Recorded as: status not derived."],
   ["Statement: I remember home", "Recorded as: memory is not evidence."],
   ["Statement: I am here", "Recorded as: arrival detected, person pending."],
   ["Statement: I will stay", "Recorded as: process may continue."]
@@ -312,7 +312,7 @@ const institutionalLogs = [
   ],
   [
     "Language corrected. Meaning changed.",
-    "Statement converted. Person reduced.",
+    "Statement converted. Status reduced.",
     "Translation accepted. Intent rejected."
   ],
   [
@@ -328,7 +328,7 @@ const institutionalLogs = [
   [
     "Completion reopened.",
     "Pending condition retained.",
-    "Almost complete is the decision."
+    "Almost complete. Decision not issued."
   ]
 ];
 
@@ -337,7 +337,7 @@ const evidenceCaptionSets = [
     "statement too large",
     "record incomplete",
     "statement not attached",
-    "life outside accepted format",
+    "statement outside accepted format",
     "harm requires official translation",
     "testimony exceeds field length"
   ],
@@ -377,7 +377,7 @@ const evidenceCaptionSets = [
 
 const exhibitionMessages = [
   "Ground reviewed. Requirement reopened.",
-  "Almost complete is the decision.",
+  "Almost complete. Decision not issued.",
   "Biometrics stored. Person unresolved.",
   "Completed status reopened.",
   "Pending decision retained."
