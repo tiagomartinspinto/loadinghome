@@ -195,7 +195,7 @@ const acts = [
 ];
 
 const officeVoices = [
-  ["Internal comment", "The file requires a smaller account."],
+  ["Internal comment", "Statement shortened. Person unresolved."],
   ["Eligibility note", "Almost complete is the decision."],
   ["Origin check", "Field content exceeds accepted category."],
   ["Former address archive", "Former address carries higher weight."],
@@ -219,7 +219,7 @@ const translationScenes = [
 
 const inspectionQuestions = [
   "Identity check: record located, person not confirmed.",
-  "Classification required: economic / compliant / invisible / integrated",
+  "Classification required. Person unresolved.",
   "Field check: name must fit the field.",
   "Biometric check: person stored, status unresolved.",
   "Silence check: no objection has been processed.",
@@ -323,7 +323,7 @@ const institutionalLogs = [
   [
     "Labor registered. Belonging not registered.",
     "Usefulness accepted. Presence pending.",
-    "Gratitude required. Proof insufficient."
+    "Support checked. Proof insufficient."
   ],
   [
     "Completion reopened.",

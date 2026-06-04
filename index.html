@@ -25,6 +25,34 @@
         <p class="intro-subtitle">Case HOME-00097 remains open.</p>
         <p class="intro-note">Decision not issued.</p>
 
+        <section class="loading-panel" aria-label="Loading progress">
+          <div class="loading-copy">
+            <p class="interface-line">
+              <span data-term="loading">Loading</span> <span data-term="home">Home</span>: 97%
+            </p>
+            <p id="loadingPhrase" aria-live="polite">Loading home record...</p>
+            <p class="small-note">Completion reopened before issuance.</p>
+          </div>
+
+          <div class="progress-block">
+            <div class="progress-meta">
+              <span>case completion</span>
+              <output id="progressOutput" for="homeProgress">91.4%</output>
+            </div>
+            <div
+              id="homeProgress"
+              class="progress-track"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="91"
+              aria-valuetext="Loading home, 91.4 percent"
+            >
+              <span id="progressFill" class="progress-fill"></span>
+            </div>
+          </div>
+        </section>
+
         <section class="case-register" aria-labelledby="case-register-title">
           <h2 id="case-register-title">Application record</h2>
           <dl class="status-table">
@@ -53,34 +81,6 @@
               <dd id="belongingStatus">not accepted</dd>
             </div>
           </dl>
-        </section>
-
-        <section class="loading-panel" aria-label="Loading progress">
-          <div class="loading-copy">
-            <p class="interface-line">
-              <span data-term="loading">Loading</span> <span data-term="home">Home</span>: 97%
-            </p>
-            <p id="loadingPhrase" aria-live="polite">Loading home record...</p>
-            <p class="small-note">Completion reopened before issuance.</p>
-          </div>
-
-          <div class="progress-block">
-            <div class="progress-meta">
-              <span>case completion</span>
-              <output id="progressOutput" for="homeProgress">91.4%</output>
-            </div>
-            <div
-              id="homeProgress"
-              class="progress-track"
-              role="progressbar"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              aria-valuenow="91"
-              aria-valuetext="Loading home, 91.4 percent"
-            >
-              <span id="progressFill" class="progress-fill"></span>
-            </div>
-          </div>
         </section>
 
         <div class="protocol-row" aria-label="Browser status residue">

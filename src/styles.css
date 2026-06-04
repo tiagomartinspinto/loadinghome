@@ -93,11 +93,11 @@ a:focus-visible {
   max-width: 920px;
   margin-right: auto;
   margin-left: auto;
-  padding: 40px 0 72px;
+  padding: 42px 0 80px;
 }
 
 .intro {
-  padding-bottom: 34px;
+  padding-bottom: 38px;
 }
 
 .case-row {
@@ -123,9 +123,9 @@ p {
 
 h1 {
   max-width: none;
-  margin-bottom: 0.44rem;
+  margin-bottom: 0.5rem;
   color: var(--ink);
-  font-size: 1.5rem;
+  font-size: 1.68rem;
   line-height: 1.08;
   font-weight: 700;
 }
@@ -152,7 +152,7 @@ h2 {
 
 .intro-note {
   max-width: 34rem;
-  margin-bottom: 30px;
+  margin-bottom: 34px;
   color: var(--ink);
   font-size: 0.94rem;
 }
@@ -162,17 +162,17 @@ h2 {
   grid-template-columns: minmax(0, 1fr) minmax(240px, 0.78fr);
   gap: 30px;
   align-items: end;
-  margin-bottom: 22px;
+  margin-bottom: 34px;
   border-top: 2px solid var(--ink);
   border-bottom: 2px solid var(--ink);
-  padding: 22px 0 24px;
+  padding: 24px 0 26px;
 }
 
 .case-register {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   border-top: 2px solid var(--ink);
   border-bottom: 1px solid var(--line);
-  padding: 15px 0 18px;
+  padding: 18px 0 20px;
 }
 
 .case-register h2 {
@@ -185,6 +185,7 @@ h2 {
   grid-template-columns: 1fr;
   margin: 0;
   border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--soft-line);
 }
 
 .status-table div {
@@ -193,7 +194,7 @@ h2 {
   gap: 1rem;
   min-width: 0;
   border-bottom: 1px solid var(--line);
-  padding: 0.58rem 0;
+  padding: 0.74rem 0;
 }
 
 .status-table dt {
@@ -214,7 +215,7 @@ h2 {
 
 #loadingPhrase {
   color: var(--ink);
-  font-size: 1.16rem;
+  font-size: 1.24rem;
   line-height: 1.24;
 }
 
@@ -341,48 +342,50 @@ h2 {
 
 .grounds-selector {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 }
 
 .grounds-selector button {
-  min-height: 34px;
+  min-height: 38px;
   border: 0;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 0.42rem 0.5rem;
+  padding: 0.52rem 0.62rem;
   background: var(--surface);
   color: var(--muted);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   text-align: left;
   text-transform: uppercase;
 }
 
 .grounds-selector button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--paper);
+  box-shadow: inset 3px 0 0 var(--ink);
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .grounds-selector button:hover,
 .grounds-selector button:focus-visible {
-  outline: 0;
-  background: var(--ink);
-  color: var(--paper);
+  outline: 1px solid var(--ink);
+  outline-offset: -2px;
+  color: var(--ink);
 }
 
 .ground-record {
   display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
-  gap: 1rem;
+  grid-template-columns: minmax(0, 0.56fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  border-top: 2px solid var(--ink);
   border-bottom: 1px solid var(--line);
-  padding: 0.72rem 0;
+  padding: 0.9rem 0;
 }
 
 .ground-record p {
   margin-bottom: 0;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.9rem;
 }
 
 .ground-record span {
@@ -399,13 +402,17 @@ h2 {
   text-transform: uppercase;
 }
 
+#groundNote {
+  color: var(--ink);
+}
+
 .process-residue {
   display: grid;
   grid-template-columns: minmax(8rem, 0.26fr) minmax(0, 1fr);
   gap: 1rem;
-  padding: 0.62rem 0 0;
+  padding: 0.56rem 0 0;
   color: var(--quiet);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
 }
 
@@ -566,7 +573,7 @@ h2 {
   gap: 1rem;
   min-width: 0;
   border-bottom: 1px solid var(--line);
-  padding: 0.58rem 0;
+  padding: 0.5rem 0;
 }
 
 .verification-table dt {
@@ -577,7 +584,7 @@ h2 {
 
 .verification-table dd {
   margin: 0;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
 }
 
 .state-valid {
@@ -749,7 +756,7 @@ textarea:focus {
 
 .status-panel {
   border-top: 1px solid var(--line);
-  padding-top: 16px;
+  padding-top: 14px;
 }
 
 .case-checks {
@@ -794,11 +801,12 @@ textarea:focus {
 
 .event-log li {
   border-bottom: 1px solid var(--line);
-  padding: 0.58rem 0;
+  padding: 0.42rem 0;
   border-left: 2px solid var(--ink);
   padding-left: 0.55rem;
-  color: var(--muted);
-  font-size: 0.8rem;
+  color: var(--quiet);
+  font-size: 0.74rem;
+  text-transform: uppercase;
 }
 
 .term-change {
