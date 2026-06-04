@@ -29,6 +29,7 @@ npm run build
 ```
 
 The app is configured for GitHub Pages under the repository path `/loadinghome/`.
+GitHub Pages must use GitHub Actions deployment so Vite serves the built `dist` bundle.
 
 Public URL:
 

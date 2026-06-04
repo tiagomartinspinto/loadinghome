@@ -335,6 +335,97 @@ h2 {
   font-size: 0.84rem;
 }
 
+.grounds-panel {
+  margin-bottom: 34px;
+}
+
+.grounds-selector {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.grounds-selector button {
+  min-height: 34px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 0.42rem 0.5rem;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.74rem;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.grounds-selector button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.grounds-selector button:hover,
+.grounds-selector button:focus-visible {
+  outline: 0;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.ground-record {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding: 0.72rem 0;
+}
+
+.ground-record p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.ground-record span {
+  display: block;
+  margin-bottom: 0.18rem;
+  color: var(--quiet);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.ground-record strong {
+  color: var(--ink);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.process-residue {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.26fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.62rem 0 0;
+  color: var(--quiet);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.process-residue > span {
+  color: var(--quiet);
+}
+
+.process-residue ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.32rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.process-residue li {
+  color: var(--muted);
+}
+
 .panel-heading {
   margin-bottom: 18px;
 }
@@ -744,6 +835,8 @@ textarea:focus {
   .case-row,
   .loading-panel,
   .grid-section,
+  .ground-record,
+  .process-residue,
   .scene-grid {
     grid-template-columns: 1fr;
   }
@@ -758,6 +851,7 @@ textarea:focus {
 
   .archive-grid,
   .field-grid,
+  .grounds-selector,
   .status-table,
   .case-checks,
   .verification-table {

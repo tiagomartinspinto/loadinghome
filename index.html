@@ -111,6 +111,39 @@
         </div>
       </section>
 
+      <section class="panel grounds-panel" aria-labelledby="grounds-title">
+        <div class="panel-heading">
+          <p class="kicker">grounds for stay</p>
+          <h2 id="grounds-title">Ground accepted as category</h2>
+          <p id="groundStatus" aria-live="polite">Status not derived.</p>
+        </div>
+
+        <div id="groundsSelector" class="grounds-selector" aria-label="Grounds for stay category">
+          <button type="button" data-ground-index="0" aria-pressed="true">work</button>
+          <button type="button" data-ground-index="1" aria-pressed="false">study</button>
+          <button type="button" data-ground-index="2" aria-pressed="false">family</button>
+          <button type="button" data-ground-index="3" aria-pressed="false">protection</button>
+          <button type="button" data-ground-index="4" aria-pressed="false">EU registration</button>
+          <button type="button" data-ground-index="5" aria-pressed="false">temporary protection</button>
+          <button type="button" data-ground-index="6" aria-pressed="false">permanent residence</button>
+          <button type="button" data-ground-index="7" aria-pressed="false">citizenship</button>
+        </div>
+
+        <div class="ground-record" aria-live="polite">
+          <p><span>ground selected</span><strong id="groundSelected">work</strong></p>
+          <p id="groundNote">Income checked. Belonging withheld.</p>
+        </div>
+
+        <div class="process-residue" aria-label="Process residue">
+          <span>process residue</span>
+          <ul id="processResidue">
+            <li>identity verified</li>
+            <li>biometrics stored</li>
+            <li>decision not issued</li>
+          </ul>
+        </div>
+      </section>
+
       <section class="grid-section" aria-label="Application and location">
         <section class="panel form-panel" aria-labelledby="form-title">
           <div class="panel-heading">

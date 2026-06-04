@@ -6,10 +6,11 @@ const phrases = [
   "Converting statement to file...",
   "Checking belonging: not confirmed.",
   "Home requires confirmation.",
-  "Origin record reopened.",
+  "Ground accepted as category.",
   "Almost complete is the decision.",
   "Address validated. Status unchanged.",
   "Residence entered. Recognition withheld.",
+  "You have arrived. The case has not.",
   "Field content exceeds accepted category.",
   "Application remains open."
 ];
@@ -77,6 +78,66 @@ const verificationStates = [
   }
 ];
 
+const groundsStates = [
+  {
+    label: "work",
+    status: "Ground accepted as category.",
+    note: "Income checked. Belonging withheld.",
+    log: "Work recorded. Status not derived."
+  },
+  {
+    label: "study",
+    status: "Study period counted.",
+    note: "Permanence not derived.",
+    log: "Study counted. Permanence withheld."
+  },
+  {
+    label: "family",
+    status: "Family tie recorded.",
+    note: "Recognition pending.",
+    log: "Family tie recorded. Requirement reopened."
+  },
+  {
+    label: "protection",
+    status: "Protection claim received.",
+    note: "Proof remains insufficient.",
+    log: "Protection received. Evidence under review."
+  },
+  {
+    label: "EU registration",
+    status: "Movement registered.",
+    note: "Belonging not issued.",
+    log: "Movement registered. Belonging not issued."
+  },
+  {
+    label: "temporary protection",
+    status: "Temporary protection recorded.",
+    note: "Duration counted again.",
+    log: "Temporary status retained. Completion withheld."
+  },
+  {
+    label: "permanent residence",
+    status: "Years counted.",
+    note: "Permanence reopened.",
+    log: "Years counted. Permanence reopened."
+  },
+  {
+    label: "citizenship",
+    status: "Citizenship path detected.",
+    note: "Language reduced to requirement.",
+    log: "Citizenship path detected. Person unresolved."
+  }
+];
+
+const residueStates = [
+  ["identity verified", "biometrics stored", "decision not issued"],
+  ["service point visited", "income threshold checked", "home not confirmed"],
+  ["attachment format rejected", "additional information requested", "case remains open"],
+  ["interview pending", "appeal period open", "extension required"],
+  ["years counted again", "language requirement retained", "permanence reopened"],
+  ["category accepted", "evidence under review", "belonging withheld"]
+];
+
 const rejectionMessages = [
   "Birthplace is not accepted as current proof.",
   "Enter an origin the file can use.",
@@ -128,9 +189,9 @@ const applicantRoles = [
 const acts = [
   ["Review stage 1 of 5", "Identity accepted as data. Person not confirmed."],
   ["Review stage 2 of 5", "Language accepted. Meaning changed."],
-  ["Review stage 3 of 5", "Evidence accepted as file. Memory rejected."],
+  ["Review stage 3 of 5", "Attachment accepted as file. Evidence rejected."],
   ["Review stage 4 of 5", "Work accepted. Belonging not accepted."],
-  ["Review stage 5 of 5", "The process may retain the case."]
+  ["Review stage 5 of 5", "Extension required before arrival is complete."]
 ];
 
 const officeVoices = [
@@ -142,7 +203,7 @@ const officeVoices = [
   ["Translation review", "Meaning adjusted to fit the field."],
   ["Document request", "Every answer creates another requirement."],
   ["Queue status", "Residence may remain in process."],
-  ["Stamp status", "Approval withheld. Labor retained."],
+  ["Stamp status", "Decision not issued. Labor retained."],
   ["Boundary rule", "Residence entered. Recognition withheld."],
   ["Pending case group", "Pending cases consolidated."]
 ];
@@ -160,7 +221,7 @@ const inspectionQuestions = [
   "Identity check: record located, person not confirmed.",
   "Classification required: economic / compliant / invisible / integrated",
   "Field check: name must fit the field.",
-  "Evidence check: memory is not accepted as evidence.",
+  "Biometric check: person stored, status unresolved.",
   "Silence check: no objection has been processed.",
   "Routing check: every document request opens another request."
 ];
@@ -315,11 +376,11 @@ const evidenceCaptionSets = [
 ];
 
 const exhibitionMessages = [
-  "Automatic review opened another requirement.",
+  "Ground reviewed. Requirement reopened.",
   "Almost complete is the decision.",
-  "Supporting evidence reclassified.",
+  "Biometrics stored. Person unresolved.",
   "Completed status reopened.",
-  "Pending condition retained."
+  "Pending decision retained."
 ];
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -370,6 +431,11 @@ const inspectionQuestion = document.querySelector("#inspectionQuestion");
 const translationInput = document.querySelector("#translationInput");
 const translationOutput = document.querySelector("#translationOutput");
 const recordCaptions = Array.from(document.querySelectorAll("[data-record-caption]"));
+const groundStatus = document.querySelector("#groundStatus");
+const groundSelected = document.querySelector("#groundSelected");
+const groundNote = document.querySelector("#groundNote");
+const groundButtons = Array.from(document.querySelectorAll("[data-ground-index]"));
+const processResidue = document.querySelector("#processResidue");
 const params = new URLSearchParams(window.location.search);
 const exhibitionMode = params.get("mode") === "exhibition";
 
@@ -383,6 +449,8 @@ let requirementCount = 0;
 let resetCount = 0;
 let birthReviewStep = -1;
 let addressReviewStep = -1;
+let groundIndex = 0;
+let residueIndex = 0;
 
 function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -438,6 +506,33 @@ function updateVerification() {
   previousAddress.textContent = state.previous;
 }
 
+function renderGrounds() {
+  const state = groundsStates[groundIndex % groundsStates.length];
+  const residue = residueStates[residueIndex % residueStates.length];
+
+  groundStatus.textContent = state.status;
+  groundSelected.textContent = state.label;
+  groundNote.textContent = state.note;
+
+  groundButtons.forEach((button, index) => {
+    const isActive = index === groundIndex % groundsStates.length;
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  const residueItems = residue.map((item) => {
+    const node = document.createElement("li");
+    node.textContent = item;
+    return node;
+  });
+  processResidue.replaceChildren(...residueItems);
+}
+
+function advanceGround(step = 1) {
+  groundIndex = (groundIndex + step) % groundsStates.length;
+  residueIndex = (residueIndex + 1) % residueStates.length;
+  renderGrounds();
+}
+
 function shiftLanguage() {
   const node = pick(termNodes);
   const key = node.dataset.term;
@@ -447,7 +542,7 @@ function shiftLanguage() {
   node.classList.add("term-change");
 
   if (Math.random() < 0.25) {
-    addLog("Language preference changed without consent.");
+    addLog("Language preference changed. Meaning reduced.");
   }
 }
 
@@ -524,13 +619,21 @@ function renderScene() {
   translationOutput.textContent = translation[1];
 }
 
-function nudge(message) {
+function nudge(message, shouldAdvanceGround = true) {
   attempts += 1;
   root.style.setProperty("--pressure", String(Math.min(attempts, 12)));
   progress = clamp(progress - (0.18 + Math.random() * 0.6), 84.2, 96.9);
   renderProgress();
   renderScene();
   renderPressureState();
+  if (shouldAdvanceGround) {
+    if (attempts % 2 === 1) {
+      advanceGround();
+    } else {
+      residueIndex = (residueIndex + 1) % residueStates.length;
+      renderGrounds();
+    }
+  }
 
   if (message) {
     formStatus.textContent = message;
@@ -613,6 +716,7 @@ function resetExperience() {
   hideSuggestions(currentAddress);
   renderScene();
   renderPressureState();
+  advanceGround();
   renderProgress();
   updateVerification();
   addLog("Start again. Pending condition retained.");
@@ -671,10 +775,22 @@ deadLinks.forEach((link) => {
   });
 });
 
+groundButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    groundIndex = Number(button.dataset.groundIndex);
+    residueIndex = (residueIndex + 1) % residueStates.length;
+    requirementCount += 1;
+    protocolStatus.textContent = `PATCH /case/ground -> 202 PENDING / category ${requirementCount}`;
+    renderGrounds();
+    nudge(groundsStates[groundIndex].log, false);
+  });
+});
+
 function runExhibitionStep() {
   requirementCount += 1;
   protocolStatus.textContent = `AUTO /case-review -> 202 PENDING / requirement ${requirementCount}`;
-  nudge(exhibitionMessages[(requirementCount - 1) % exhibitionMessages.length]);
+  advanceGround();
+  nudge(exhibitionMessages[(requirementCount - 1) % exhibitionMessages.length], false);
   updateVerification();
   if (Math.random() < 0.5) {
     updatePhrase();
@@ -685,6 +801,7 @@ renderProgress();
 renderScene();
 renderPressureState();
 updateVerification();
+renderGrounds();
 
 window.setInterval(updateProgress, reducedMotion ? 6500 : 1800);
 window.setInterval(updatePhrase, reducedMotion ? 11000 : 6200);
