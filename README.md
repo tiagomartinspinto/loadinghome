@@ -42,6 +42,13 @@ Recommended presentation: fullscreen browser or kiosk mode on a dedicated monito
 
 No server-side component is required after the static build is deployed. The Lekton font is self-hosted in the repository under the SIL Open Font License.
 
+Museum package:
+
+- [Artwork Statement](ARTWORK_STATEMENT.md)
+- [Installation Notes](INSTALLATION.md)
+- [Technical Rider](TECH_RIDER.md)
+- [Conservation Notes](CONSERVATION.md)
+
 ## Privacy
 
 No analytics, tracking, external APIs, cookies, uploads, or `localStorage` are used. Form entries stay only in the current browser session.
